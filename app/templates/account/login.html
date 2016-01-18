@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script>
+        var idcheck = false
+        var nickcheck = false
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>LOGIN</strong>
+            </h2>
+            <hr>
+        </div>
+        <div style="height: auto; width: 100%;" align="center">
+            <form class="form-horizontal" method="post">
+              <div class="form-group" style="width: 60%">
+                <label for="InputID" class="col-sm-2 control-label">UserID</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="userid" id="InputID" placeholder="UserID">
+                </div>
+              </div>
+              <div class="form-group" style="width: 60%">
+                <label for="InputPassword" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" name="userpw" class="form-control" id="InputPassword" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group" style="width: 60%">
+                <div class="col-sm-offset-2 col-sm-10" align="right">
+                  <button type="submit" class="btn btn-default">Login</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>SIGNUP</strong>
+            </h2>
+            <hr>
+        </div>
+        <div style="height: auto; width: 100%;" align="center">
+            <form id="SignupForm" class="form-horizontal" action="useradd" method="post" onsubmit="return addsubmit();">
+              <div class="form-group" style="width: 60%">
+                <label for="SignupID" class="col-sm-2 control-label">UserID</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="userid" id="SignupID" placeholder="사용할 아이디를 입력하세요" onfocusout="checkid()">
+                    <span id="IdDupResult">{{ iderror }}</span>
+                </div>
+              </div>
+              <div class="form-group" style="width: 60%">
+                <label for="SignupNickname" class="col-sm-2 control-label">Nick</label>
+                <div class="col-sm-10">
+                  <input type="text" name="nickname" class="form-control" id="SignupNickname" placeholder="사용할 닉네임를 입력하세요" onfocusout="checknick()">
+                    <span id="NickDupResult">{{ nickerror }}</span>
+                </div>
+              </div>
+              <div class="form-group" style="width: 60%">
+                <label for="SignupPassword" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" name="userpw" class="form-control" id="SignupPassword" placeholder="사용할 비밀번호를 입력하세요">
+                </div>
+              </div>
+              <div class="form-group" style="width: 60%">
+                <div class="col-sm-offset-2 col-sm-10" align="right">
+                  <button type="submit" class="btn btn-default">Signup</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+    <script>
+
+
+        function checkid() {
+            var input = document.getElementById('SignupID').value;
+            var result = document.getElementById('IdDupResult');
+            if (input == ""){
+                result.innerText="";
+                return false
+            }
+            var url = "dupcheck?id=" + input;
+            var req = new XMLHttpRequest();
+
+
+            req.open("GET", url, true);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if(req.status == 200){
+                        if (req.responseText == "true") {
+                            result.innerText = "사용할 수 없는 아이디 입니다.";
+                            idcheck = false;
+                        }
+                        else {
+                            result.innerText = "사용 가능한 아이디 입니다.";
+                            idcheck = true;
+                        }
+                    }
+                    else
+                        result.innerText="Error.. Just Keep Going";
+                }
+            };
+
+
+            req.send(null);
+
+        }
+
+        function checknick() {
+            var input = document.getElementById('SignupNickname').value;
+            var result = document.getElementById('NickDupResult')
+            if (input == ""){
+                result.innerText="";
+                return false
+            }
+
+            var url = "dupcheck?nick=" + input;
+            var req = new XMLHttpRequest();
+
+
+            req.open("GET", url, true);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if (req.status == 200) {
+                        //result.innerText=req.responseText;
+                        if (req.responseText == "true") {
+                            result.innerText = "사용할 수 없는 닉네임 입니다.";
+                            nickcheck=false;
+                        }
+                        else {
+                            result.innerText = "사용 가능한 닉네임 입니다.";
+                            nickcheck=true;
+                        }
+                    }
+                    else
+                        result.innerText="Error.. Just Keep Going";
+                }
+            };
+
+
+            req.send(null);
+
+        }
+
+        function addsubmit() {
+            if (idcheck == false){
+                alert("아이디를 확인해주세요")
+                return false;
+            }
+            else if (nickcheck == false) {
+                alert("닉네임을 확인해주세요")
+                return false;
+            }
+            else{
+                document.getElementById('SignupForm').submit();
+                return true
+            }
+        }
+
+    </script>
+
+{% endblock %}
