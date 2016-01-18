@@ -2,9 +2,14 @@
 
 {% block head %}
     <script>
-        var idcheck = false
-        var nickcheck = false
+        var idcheck = false;
+        var nickcheck = false;
     </script>
+
+    {% if loginerror == True %}
+    <script>alert("아이디 혹은 비밀번호가 잘못 입력되었습니다.")</script>
+    {% endif %}
+
 {% endblock %}
 
 {% block body %}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 from .. import db
 from . import account_blueprint
 from .models import User
@@ -17,19 +17,27 @@ def login():
             pass
         else:
             if error == "userid":
-                return render_template('account/login.html',
+                return render_template('login.html',
                                        iderror=u"사용할 수 없는 아이디 입니다.")
             elif error == "nickname":
-                return render_template('account/login.html',
+                return render_template('login.html',
                                        nickerror=u"사용할 수 없는 닉네임 입니다.")
             else:
                 pass
 
-        return render_template('account/login.html')
+        return render_template('login.html')
 
     else:
-
-
+        data = request.form
+        u = db.session.query(User).filter_by(userid=data['userid'], userpw=data['userpw'], active=True).first()
+        if u is not None:
+            session['login'] = True
+            session['userid'] = u.userid
+            session['nickname'] = u.nickname
+            session['admin'] = u.is_admin
+            return redirect(url_for('main.main_index'))
+        else:
+            return render_template('login.html')
 
 
 @account_blueprint.route('/dupcheck', methods=['GET'])
@@ -72,3 +80,12 @@ def useradd():
         return redirect(url_for('account.login', error=dupkey))
     else:
         return redirect(url_for('account.login'))
+
+
+@account_blueprint.route('/logout')
+def logout():
+    session['login'] = False
+    session['nickname'] = 'Guest'
+    session['userid'] = 'Guest'
+    session['admin'] = False
+    return redirect(url_for('.login'))

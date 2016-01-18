@@ -2,6 +2,6 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint
 
-main_blueprint = Blueprint('main', __name__, template_folder='../templates/main/')
+prob_blueprint = Blueprint('prob', __name__, template_folder='../templates/prob/')
 
 from . import views

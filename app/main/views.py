@@ -4,6 +4,8 @@ from flask import render_template, send_from_directory, redirect, url_for
 
 from . import main_blueprint
 from .. import app
+from .. import db
+from ..account.models import User
 
 
 @main_blueprint.route('/')
@@ -13,17 +15,21 @@ def main_index():
 
 @main_blueprint.route('/index')
 def index():
-    return render_template('main/index.html')
+    return render_template('index.html',
+                           test=123)
 
 
 @main_blueprint.route('/auth')
 def blog():
-    return render_template('main/auth.html')
+    return render_template('auth.html')
 
 
 @main_blueprint.route('/rank')
 def contact():
-    return render_template('main/rank.html')
+    rank = db.session.query(User).filter_by(active=True).order_by('score').all()
+    return render_template('rank.html',
+                           rank=rank,
+                           rank_cnt=len(rank))
 
 
 @main_blueprint.route('/css/<path:filename>')

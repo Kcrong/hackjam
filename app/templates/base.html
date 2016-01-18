@@ -64,7 +64,11 @@
                         <a href="/rank">Rank</a>
                     </li>
                     <li>
-                        <a href="/account/login">Login</a>
+                        {% if session['login'] == True %}
+                            <a href="/account/logout">Logout</a>
+                        {% else %}
+                            <a href="/account/login">Login</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
