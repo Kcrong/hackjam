@@ -8,13 +8,11 @@ from .. import app
 
 @main_blueprint.route('/')
 def main_index():
-    session['login'] = False
     return redirect(url_for('main.index'))
 
 
 @main_blueprint.route('/index')
 def index():
-    session['login'] = False
     return render_template('index.html')
 
 
