@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask import render_template, send_from_directory, redirect, url_for
+from flask import render_template, send_from_directory, redirect, url_for, session
 
 from . import main_blueprint
 from .. import app
@@ -8,13 +8,14 @@ from .. import app
 
 @main_blueprint.route('/')
 def main_index():
+    session['login'] = False
     return redirect(url_for('main.index'))
 
 
 @main_blueprint.route('/index')
 def index():
-    return render_template('index.html',
-                           test=123)
+    session['login'] = False
+    return render_template('index.html')
 
 
 @main_blueprint.route('/css/<path:filename>')
