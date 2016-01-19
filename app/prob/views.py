@@ -149,6 +149,7 @@ def auth():
                                        error='dup')
             u.success_prob.append(p)
             u.score = (int(u.score) + int(p.score))
+            db.session.commit()
             return render_template('auth.html',
                                    error='false',
                                    title=p.title)
