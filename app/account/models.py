@@ -20,4 +20,4 @@ class User(db.Model):
     is_admin = db.Column(db.BOOLEAN, default=False, nullable=False)
     prob = db.relationship(Prob)
     success_prob = db.relationship('Prob', secondary=success_probs,
-                                   backref=db.backref('users', lazy='dynamic'))
+                                   backref=db.backref('users'))

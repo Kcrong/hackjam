@@ -12,7 +12,7 @@ class Prob(db.Model):
     maker_id = db.Column(db.INTEGER, db.ForeignKey('user.id'))
     maker_nick = db.Column(db.String(50))
     maker = db.relationship('User',
-                            backref=db.backref('probes', lazy='dynamic'))
+                            backref=db.backref('probes'))
     active = db.Column(db.BOOLEAN, default=True, nullable=False)
     file = db.Column(db.String(50))
 
