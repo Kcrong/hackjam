@@ -15,7 +15,7 @@
           <th>Rank</th>
           <th>Nickname</th>
           <th>Score</th>
-          <th>UserID</th>
+          <th>Last Solved Prob</th>
         </tr>
       </thead>
       <tbody>
@@ -24,7 +24,7 @@
                 <th scope="row">{{ ranking|torank }}</th>
                 <td>{{ rank[ranking].nickname }}</td>
                 <td>{{ rank[ranking].score }}</td>
-                <td>@{{ rank[ranking].userid }}</td>
+                <td><strong>{{ rank[ranking].success_prob[-1].title }}</strong> <small>by {{ rank[ranking].success_prob[-1].maker_nick }}</small></td>
             </tr>
         {% endfor %}
       </tbody>

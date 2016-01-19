@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>WELOVEHACKING.kr</title>
+    <title>WeLoveHacking</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="index.html"><a href="/">Wargame</a></a>
+                <a class="navbar-brand" href="index.html">WeLoveHacking</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,10 +58,10 @@
                         <a href="/prob/list">Prob</a>
                     </li>
                     <li>
-                        <a href="/auth">Auth</a>
+                        <a href="/prob/auth">Auth</a>
                     </li>
                     <li>
-                        <a href="/rank">Rank</a>
+                        <a href="/account/rank">Rank</a>
                     </li>
                     <li>
                         {% if session['login'] == True %}
@@ -70,6 +70,10 @@
                             <a href="/account/login">Login</a>
                         {% endif %}
                     </li>
+                    <li>
+                        <a href="/prob/upload">My Probs</a>
+                    </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

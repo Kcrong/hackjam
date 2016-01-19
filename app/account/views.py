@@ -6,6 +6,7 @@ from . import account_blueprint
 from .models import User
 from werkzeug.exceptions import BadRequestKeyError
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import desc
 
 
 @account_blueprint.route('/login', methods=['GET', 'POST'])
@@ -37,7 +38,8 @@ def login():
             session['admin'] = u.is_admin
             return redirect(url_for('main.main_index'))
         else:
-            return render_template('login.html')
+            return render_template('login.html',
+                                   loginerror=True)
 
 
 @account_blueprint.route('/dupcheck', methods=['GET'])
@@ -89,3 +91,11 @@ def logout():
     session['userid'] = 'Guest'
     session['admin'] = False
     return redirect(url_for('.login'))
+
+
+@account_blueprint.route('/rank')
+def rank():
+    rank = db.session.query(User).filter_by(active=True).order_by(desc('score')).all()
+    return render_template('rank.html',
+                           rank=rank,
+                           rank_cnt=len(rank))

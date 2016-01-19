@@ -9,10 +9,5 @@ def run():
     app.run(host='0.0.0.0')
 
 
-@manager.command
-def run_debug():
-    app.run(host='0.0.0.0', debug=True)
-
-
 if __name__ == "__main__":
     manager.run()

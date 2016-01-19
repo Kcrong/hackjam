@@ -2,6 +2,12 @@
 # -*- coding:utf-8 -*-
 
 from .. import db
+from ..prob.models import Prob
+
+success_probs = db.Table('success_probs',
+                         db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+                         db.Column('prob_id', db.Integer, db.ForeignKey('prob.id'))
+                         )
 
 
 class User(db.Model):
@@ -12,5 +18,6 @@ class User(db.Model):
     active = db.Column(db.Boolean, default=True, nullable=False)
     nickname = db.Column(db.String(30), unique=True, nullable=False)
     is_admin = db.Column(db.BOOLEAN, default=False, nullable=False)
-
-
+    prob = db.relationship(Prob)
+    success_prob = db.relationship('Prob', secondary=success_probs,
+                                   backref=db.backref('users', lazy='dynamic'))

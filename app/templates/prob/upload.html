@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script>
+        function ProbOn(Switch, data){
+            Switch.style.backgroundColor = '#5cb85c';
+            Switch.innerHTML = 'ACTIVATE';
+            data.value = 'on';
+        }
+        function ProbOff(Switch, data){
+            Switch.style.backgroundColor = '#d9534f';
+            Switch.innerHTML = 'DEACTIVATE';
+            data.value = 'off';
+        }
+
+        function set_probinfo(probdata){
+            /*
+            * ProbTitle, ProbScore, ProbKey, ProbContent, ProbImage
+            */
+            // ProbTitle = id.children[1].children[0].innerText
+            // ProbScore = id.children[1].children[1].innerText
+            // ProbImage = id.children[0].src
+
+            document.getElementById('ProbTitle').value = probdata.children[1].children[0].innerHTML;
+            document.getElementById('ProbScore').value = probdata.children[1].children[1].innerHTML;
+            document.getElementById('ProbKey').value = probdata.children[2].innerHTML;
+            document.getElementById('ProbContent').value = probdata.children[3].innerHTML;
+            document.getElementById('ProbID').value = probdata.children[4].innerHTML;
+            document.getElementById('ProbAdd').value = false;
+            document.getElementById('SubmitButton').innerHTML = "Change";
+            var Switch = document.getElementById('ProbOnOffSwitch');
+            var data = document.getElementById('ProbOnOff');
+            var active = probdata.children[5].innerHTML;
+            if (active == 'True'){
+                ProbOn(Switch, data);
+            }
+            else if(active == 'False'){
+                ProbOff(Switch, data);
+            }
+            window.location.href='#ProbTitle';
+        }
+
+        function reset_form(){
+            document.getElementById('ProbTitle').value = "";
+            document.getElementById('ProbScore').value = "";
+            document.getElementById('ProbKey').value = "";
+            document.getElementById('ProbContent').value = "";
+            document.getElementById('ProbAdd').value = true;
+            document.getElementById('SubmitButton').innerHTML = "Upload";
+            document.getElementById('ProbID').value = "";
+            document.getElementById('ProbImage').value = "";
+            var Switch = document.getElementById('ProbOnOffSwitch');
+            var data = document.getElementById('ProbOnOff');
+            ProbOn(Switch, data);
+            return false;
+        }
+
+        function ProbSwitching(){
+            var Switch = document.getElementById('ProbOnOffSwitch');
+            var data = document.getElementById('ProbOnOff');
+            if (Switch.innerHTML == 'ACTIVATE')
+                ProbOff(Switch, data);
+            else if (Switch.innerHTML == 'DEACTIVATE')
+                ProbOn(Switch, data);
+
+            return false;
+        }
+
+        function check_form(){
+            var no_input;
+            if (document.getElementById('ProbTitle').value == ""){no_input=document.getElementById('ProbTitle')}
+            else if(document.getElementById('ProbScore').value == ""){no_input=document.getElementById('ProbScore')}
+            else if(document.getElementById('ProbKey').value == ""){no_input=document.getElementById('ProbKey')}
+            else if(document.getElementById('ProbContent').value == ""){no_input=document.getElementById('ProbContent')}
+            else{
+                return true;
+            }
+            no_input.focus();
+            return false
+        }
+
+        function checkkey() {
+            var input = document.getElementById('ProbKey').value;
+            var result = document.getElementById('KeyDupResult');
+            if (input == ""){
+                result.innerText="";
+                return false
+            }
+            var url = "dupcheck?key=" + input;
+            var req = new XMLHttpRequest();
+
+
+            req.open("GET", url, true);
+
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if(req.status == 200){
+                        if (req.responseText == "true") {
+                            result.innerHTML = "이미 사용된 인증키 입니다.";
+                            idcheck = false;
+                        }
+                        else {
+                            result.innerHTML = "사용 가능한 인증키 입니다.";
+                            idcheck = true;
+                        }
+                    }
+                    else
+                        result.innerHTML="Error.. Just Keep Going";
+                }
+            };
+
+
+            req.send(null);
+
+        }
+
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">YOUR
+                <strong>PROBS</strong>
+            </h2>
+            <hr>
+        </div>
+        {% for prob in prob_list %}
+        <div class="col-sm-4 text-center" href="#ProbTitle" onclick="set_probinfo(this)" >
+            <img class="img-responsive" src="/prob/prob_image/{{ prob.file }}" alt="Preview Image">
+            <h3><span>{{ prob.title }}</span>&nbsp;<small>{{ prob.score }}</small></h3>
+            <span hidden>{{ prob.key }}</span>
+            <span hidden>{{ prob.content }}</span>
+            <span hidden>{{ prob.id }}</span>
+            <span hidden>{{ prob.active }}</span>
+        </div>
+        {% endfor %}
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>Prob Admin Page</strong>
+            </h2>
+            <hr>
+        </div>
+        <div style="height: auto; width: 100%;" align="center">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="return check_form()">
+              <div class="form-group" style="width: 70%">
+                <label for="InputID" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="probtitle" id="ProbTitle" placeholder="ProbTitle">
+                </div>
+              </div>
+              <div class="form-group" style="width: 70%">
+                <label for="ProebScore" class="col-sm-2 control-label">Score</label>
+                <div class="col-sm-10">
+                  <input type="number" name="probscore" class="form-control" id="ProbScore" placeholder="Prob Score">
+                </div>
+              </div>
+              <div class="form-group" style="width: 70%">
+                <label for="ProbKey" class="col-sm-2 control-label">Key</label>
+                <div class="col-sm-10">
+                  <input type="text" name="probkey" class="form-control" id="ProbKey" placeholder="Auth Key" onfocusout="checkkey()">
+                    <span id="KeyDupResult">
+                    {% if keyerror == true %}
+                    사용할 수 없는 인증키 입니다.
+                    {% endif %}
+                    </span>
+                </div>
+              </div>
+              <div class="form-group" style="width: 80%">
+                <label for="ProbContent" class="col-sm-2 control-label">About</label>
+                <div class="col-sm-10">
+                  <textarea name="probcontent" class="form-control" id="ProbContent" rows="10" placeholder="내용을 입력해주세요."></textarea>
+                </div>
+              </div>
+              <div class="form-group" style="width: 70%">
+                <label for="ProbImage" class="col-sm-2 control-label">ProbImage</label>
+                <div class="col-sm-10">
+                  <input type="file" name="probimage" id="ProbImage">
+                    <p class="help-block"><strong>이미지파일</strong>만 업로드 해주세요.</p>
+                </div>
+              </div>
+
+                <input id="ProbAdd" type="hidden" name="add" value=true>
+                <input id="ProbID" type="hidden" name="id" value="none">
+                <input id="ProbOnOff" type="hidden" name="onoff" value='on'>
+
+              <div class="form-group" style="width: 80%">
+                <div class="col-sm-offset-2 col-sm-10" align="right">
+                  <button style="background-color: #5cb85c" id="ProbOnOffSwitch" class="btn btn-default" onclick="return ProbSwitching()">ACTIVATE</button>
+                  <button id="ResetButton" class="btn btn-default" onclick="return reset_form()">Reset</button>
+                  <button id="SubmitButton" type="submit" class="btn btn-default" >Upload</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+{% endblock %}

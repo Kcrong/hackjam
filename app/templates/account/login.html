@@ -57,7 +57,7 @@
             <hr>
         </div>
         <div style="height: auto; width: 100%;" align="center">
-            <form id="SignupForm" class="form-horizontal" action="useradd" method="post" onsubmit="return addsubmit();">
+            <form id="SignupForm" class="form-horizontal" action="useradd" method="post">
               <div class="form-group" style="width: 60%">
                 <label for="SignupID" class="col-sm-2 control-label">UserID</label>
                 <div class="col-sm-10">
@@ -163,21 +163,6 @@
 
             req.send(null);
 
-        }
-
-        function addsubmit() {
-            if (idcheck == false){
-                alert("아이디를 확인해주세요")
-                return false;
-            }
-            else if (nickcheck == false) {
-                alert("닉네임을 확인해주세요")
-                return false;
-            }
-            else{
-                document.getElementById('SignupForm').submit();
-                return true
-            }
         }
 
     </script>
