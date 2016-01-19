@@ -65,6 +65,7 @@ def dupcheck():
 
 @account_blueprint.route('/useradd', methods=['POST'])
 def useradd():
+    from ..prob.models import Prob
     # userid
     # userpw
     # nickname
@@ -72,7 +73,7 @@ def useradd():
     u.userid = request.form['userid']
     u.userpw = request.form['userpw']
     u.nickname = request.form['nickname']
-    u.success_prob.append(None)
+    u.success_prob.append(db.session.query(Prob).filter_by(title="signup").first())
     db.session.add(u)
     try:
         db.session.commit()
