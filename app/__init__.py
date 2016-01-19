@@ -27,8 +27,8 @@ def create_app():
 
 app = create_app()
 db = SQLAlchemy(app)
-
-if db.session.query(Prob).filter_by(title='signup').first() is None:
+import prob.models
+if db.session.query(prob.models.Prob).filter_by(title='signup').first() is None:
     p = Prob()
     p.title = "signup"
     p.score = "0"
