@@ -72,7 +72,7 @@ def useradd():
     u.userid = request.form['userid']
     u.userpw = request.form['userpw']
     u.nickname = request.form['nickname']
-
+    u.success_prob.append(None)
     db.session.add(u)
     try:
         db.session.commit()
