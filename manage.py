@@ -6,7 +6,7 @@ from app import app, manager
 
 @manager.command
 def run():
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
 
 
 if __name__ == "__main__":
