@@ -7,6 +7,8 @@
         <script>alert('{{ title }} 문제가 인증되었습니다.')</script>
     {% elif error == 'dup' %}
         <script>alert('이미 인증한 문제입니다.')</script>
+    {% elif error == 'login' %}
+        <script>alert('로그인이 필요합니다!')</script>
     {% endif %}
 {% endblock %}
 

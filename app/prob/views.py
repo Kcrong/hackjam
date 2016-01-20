@@ -136,6 +136,10 @@ def auth():
         return render_template('auth.html',
                                error=None)
     else:
+        if not session['login']:
+            return render_template('auth.html',
+                                   error='login')
+
         key = request.form['authkey']
         p = db.session.query(Prob).filter_by(key=key).first()
         if p is None:
