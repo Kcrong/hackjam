@@ -4,12 +4,12 @@ import random
 import string
 
 from flask import render_template, request, session, redirect, url_for, send_from_directory
-from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
+from werkzeug.exceptions import BadRequestKeyError
+
 from models import *
 from . import prob_blueprint
 from .. import db
-from werkzeug.exceptions import BadRequestKeyError
 
 
 def randomkey(length):
@@ -19,14 +19,13 @@ def randomkey(length):
 @prob_blueprint.route('/list')
 def list():
     from ..account.models import User
-    all_user = db.session.query(User).filter_by(active=True).order_by(desc('score')).all()
+
+    all_user = db.session.query(User).filter_by(active=True).all()
+
     for user in all_user:
-        if len(user.prob) == 0:
-            all_user.pop(all_user.index(user))
-        else:
-            for i in user.prob:
-                if not i.active:
-                    user.prob.pop(user.prob.index(i))
+        for prob in user.prob:
+            if prob.active is False:
+                user.prob.pop(user.prob.index(prob))
 
     try:
         if session['login'] is True:
@@ -97,7 +96,7 @@ def upload():
             u = db.session.query(User).filter_by(userid=session['userid'], nickname=session['nickname']).first()
             p = Prob()
             p.title = data['probtitle']
-            p.score = data['probscore']
+            p.score = abs(int(data['probscore']))
             p.key = data['probkey']
             p.content = data['probcontent']
             p.maker_id = u.id
@@ -120,7 +119,7 @@ def upload():
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            return redirect(url_for('.upload', error='authkey')+'#ProbTitle')
+            return redirect(url_for('.upload', error='authkey') + '#ProbTitle')
 
         return redirect(url_for('.upload'))
 
