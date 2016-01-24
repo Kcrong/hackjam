@@ -51,13 +51,6 @@ def user_session():
     return session
 
 
-@app.context_processor
-def template_processor():
-    user_data = user_session()
-    return dict(userid=user_data['userid'],
-                nickname=user_data['nickname'])
-
-
 @app.template_filter('torank')
 def index_rank(index):
     return int(index) + 1
