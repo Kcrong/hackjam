@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f61ac080-6bdd-4a57-a441-450c65edf4b9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/wargame.iml" afterPath="$PROJECT_DIR$/.idea/wargame.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/__init__.py" afterPath="$PROJECT_DIR$/app/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/prob/models.py" afterPath="$PROJECT_DIR$/app/prob/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/prob/views.py" afterPath="$PROJECT_DIR$/app/prob/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/account/rank.html" afterPath="$PROJECT_DIR$/app/templates/account/rank.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/prob/prob.html" afterPath="$PROJECT_DIR$/app/templates/prob/prob.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/prob/upload.html" afterPath="$PROJECT_DIR$/app/templates/prob/upload.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.py" afterPath="$PROJECT_DIR$/config.py" />
     </list>
     <ignored path="wargame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,12 +47,12 @@
           <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/prob/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6166395">
-                  <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+                <state vertical-scroll-proportion="0.588907">
+                  <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
                   <folding>
                     <element signature="e#45#58#0" expanded="true" />
-                    <element signature="e#4341#5459#0" expanded="false" />
-                    <element signature="e#5517#5667#0" expanded="false" />
+                    <element signature="e#4507#5625#0" expanded="false" />
+                    <element signature="e#5683#5833#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -79,56 +72,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="prob.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="prob.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/templates/prob/prob.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-16.37037">
-                  <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+                <state vertical-scroll-proportion="0.69283277">
+                  <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="rank.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/templates/account/rank.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7986348">
-                  <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/__init__.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#45#77#0" expanded="true" />
-                    <element signature="e#1169#1287#0" expanded="false" />
-                    <element signature="e#1348#1369#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="upload.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/templates/prob/upload.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.534483">
-                  <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
-                  <folding>
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#4;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#5;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#img#0;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#6;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -183,11 +132,11 @@
         <option value="$PROJECT_DIR$/app/account/views.py" />
         <option value="$PROJECT_DIR$/app/prob/models.py" />
         <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/app/prob/views.py" />
         <option value="$PROJECT_DIR$/app/templates/prob/upload.html" />
-        <option value="$PROJECT_DIR$/app/templates/prob/prob.html" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/templates/account/rank.html" />
+        <option value="$PROJECT_DIR$/app/templates/prob/prob.html" />
+        <option value="$PROJECT_DIR$/app/prob/views.py" />
       </list>
     </option>
   </component>
@@ -1010,7 +959,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453615696940</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="카테고리 정렬 방식으로 변경.&#10;문제 파일 업로드 기능 추">
+      <created>1453656616855</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1453656616855</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1081,7 +1036,8 @@
     <MESSAGE value="try~except 까지 묶어놓음." />
     <MESSAGE value="main 쿼리 수정함. order_by() 뺌. 디비 트랜젝션 단위를 나눔. wsgi 파일 추가" />
     <MESSAGE value="Complete Front-End at Upload" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete Front-End at Upload" />
+    <MESSAGE value="카테고리 정렬 방식으로 변경.&#10;문제 파일 업로드 기능 추" />
+    <option name="LAST_COMMIT_MESSAGE" value="카테고리 정렬 방식으로 변경.&#10;문제 파일 업로드 기능 추" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1480,18 +1436,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/prob/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6166395">
-          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
-          <folding>
-            <element signature="e#45#58#0" expanded="true" />
-            <element signature="e#4341#5459#0" expanded="false" />
-            <element signature="e#5517#5667#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1504,18 +1448,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/prob/prob.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.37037">
-          <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/account/rank.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7986348">
           <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/prob/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.588907">
+          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <folding>
+            <element signature="e#45#58#0" expanded="true" />
+            <element signature="e#4507#5625#0" expanded="false" />
+            <element signature="e#5683#5833#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/prob/prob.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69283277">
+          <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
           <folding />
         </state>
       </provider>

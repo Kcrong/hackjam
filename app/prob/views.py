@@ -135,6 +135,11 @@ def prob_image(filename):
     return send_from_directory(prob_blueprint.root_path + '/prob_images/', filename)
 
 
+@prob_blueprint.route('/upload_files/<path:filename>')
+def prob_file(filename):
+    return send_from_directory(prob_blueprint.root_path + '/prob_files/', filename)
+
+
 @prob_blueprint.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'GET':
