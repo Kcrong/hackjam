@@ -120,6 +120,15 @@ def init_db():
     p.title = "Forensic"
     db.session.add(p)
 
+    p = Category()
+    p.title = "ETC"
+    db.session.add(p)
+
     db.session.commit()
 
+    import os
+    if not os.path.exists('./prob/prob_files'):
+        os.makedirs('./prob/prob_files', mode=777)
+    if not os.path.exists('./prob/prob_images'):
+        os.makedirs('./prob/prob_images', mode=777)
 
