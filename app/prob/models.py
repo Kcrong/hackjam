@@ -13,7 +13,9 @@ class Prob(db.Model):
                             backref=db.backref('probes'))
     active = db.Column(db.BOOLEAN, default=True, nullable=False)
     image = db.Column(db.String(3000))
+    image_original = db.Column(db.String(300))
     file = db.Column(db.String(3000))
+    file_original = db.Column(db.String(300))
     category = db.relationship('Category')
     category_id = db.Column(db.INTEGER, db.ForeignKey('category.id'), nullable=False)
 

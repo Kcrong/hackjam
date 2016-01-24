@@ -25,9 +25,9 @@
             {% if prob.active == true %}
             <div class="col-sm-4 text-center" data-toggle="modal" data-target="#{{ prob.id }}">
                 {% if prob in success %}
-                <img style="border: 8px dotted black;" class="img-responsive" src="/prob/prob_image/{{ prob.file }}" alt="Preview Image">
+                <img style="border: 8px dotted black;" class="img-responsive" src="/prob/prob_image/{{ prob.image }}" alt="Preview Image">
                 {% else %}
-                <img class="img-responsive" src="/prob/prob_image/{{ prob.file }}" alt="Preview Image">
+                <img class="img-responsive" src="/prob/prob_image/{{ prob.image }}" alt="Preview Image">
                 {% endif %}
                 <h3><span>{{ prob.title }}</span>&nbsp;<small>{{ prob.score }}</small></h3>
                 <span hidden>{{ prob.key }}</span>

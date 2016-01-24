@@ -5,7 +5,7 @@ import string
 
 from flask import render_template, request, session, redirect, url_for, send_from_directory
 from sqlalchemy.exc import IntegrityError
-from werkzeug.exceptions import BadRequestKeyError
+from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
 
 from models import *
 from . import prob_blueprint
@@ -38,12 +38,27 @@ def list():
                            success=success_prob)
 
 
-def saveimagefile(getfile):
+def saveimagefile(getfile, p):
     if getfile.filename == '':
-        return 'default.png'
+        if p.image is None:
+            return 'default.png'
+        else:
+            return p.image
     else:
         filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
         getfile.save(prob_blueprint.root_path + '/prob_images/' + filename)
+        return filename
+
+
+def saveprobfile(getfile, p):
+    if getfile.filename == '':
+        if p.file is None:
+            return ''
+        else:
+            return p.file
+    else:
+        filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
+        getfile.save(prob_blueprint.root_path + '/prob_files/' + filename)
         return filename
 
 
@@ -59,8 +74,7 @@ def upload():
 
     if request.method == 'GET':
         try:
-            if request.args['error'] == 'authkey':
-                error = True
+            error = request.args['error']
         except BadRequestKeyError:
             error = False
 
@@ -69,24 +83,24 @@ def upload():
         return render_template('upload.html',
                                category_list=category_list,
                                prob_list=prob_list,
-                               keyerror=error)
+                               error=error)
     else:
-        # 문제 추가 백엔드 작업만 하면됨.
-        # 프론트 완료
         data = request.form
         for i in data:
             if i == 'probimage' or i == 'probfile':
                 continue
             elif data[i] == '':
-                return redirect(url_for('.upload'))
+                return redirect(url_for('.upload', error='nodata'))
 
         if data['onoff'] == 'on':
             onoff = True
         elif data['onoff'] == 'off':
             onoff = False
-
+        probimage = request.files['probimage']
+        probfile = request.files['probfile']
         p = db.session.query(Prob).filter_by(id=data['id']).first()
         u = db.session.query(User).filter_by(id=session['id']).first()
+        c = db.session.query(Category).filter_by(title=data['category']).first()
 
         if p is None or data['add'] == 'true':
             p = Prob()
@@ -97,11 +111,15 @@ def upload():
             p.key = data['probkey']
         p.content = data['probcontent']
         p.maker_id = u.id
-        p.image = saveimagefile(request.files['probimage'])
-        p.file = saveprobfile(request.files['probfile'])
+        p.image = saveimagefile(probimage, p)
+        p.image_original = probimage.filename
+        p.file = saveprobfile(probfile, p)
+        p.file_original = probfile.filename
         p.active = onoff
         p.maker = u
         p.maker_id = u.id
+        p.category_id = c.id
+        p.category = c
 
         try:
             db.session.commit()

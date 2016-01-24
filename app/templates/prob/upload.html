@@ -2,6 +2,13 @@
 
 {% block head %}
     <script>
+        {% if error == 'nodata' %}
+        alert('제목, 카테고리, 인증키, 내용을 모두 입력해주세요!');
+        {% elif error == 'keyerror' %}
+        alert('사용할 수 없는 인증키 입니다!');
+        {% endif %}
+
+        var probkey;
         function ProbOn(Switch, data){
             Switch.className = "btn btn-success";
             Switch.innerHTML = 'ACTIVATE';
@@ -16,12 +23,14 @@
         function set_probinfo(probdata){
             document.getElementById('ProbTitle').value = probdata.children[1].children[0].innerHTML;
             document.getElementById('ProbKey').value = probdata.children[2].innerHTML;
+            probkey = probdata.children[2].innerHTML;
             document.getElementById('ProbContent').value = probdata.children[3].innerHTML;
             document.getElementById('ProbID').value = probdata.children[4].innerHTML;
             document.getElementById('ProbAdd').value = false;
             document.getElementById('SubmitButton').innerHTML = "Change";
-            document.getElementById('ProbImageLabel').innerHTML = probdata.children[6].innerHTML;
+            document.getElementById('ProbImageLabel').innerHTML = probdata.children[9].innerHTML;
             document.getElementById('ProbFileLabel').innerHTML = probdata.children[7].innerHTML;
+            document.getElementById('UploadedImage').src = probdata.children[0].src;
             var Switch = document.getElementById('ProbOnOffSwitch');
             var data = document.getElementById('ProbOnOff');
             var active = probdata.children[5].innerHTML;
@@ -33,9 +42,15 @@
             }
 
             var categories = document.getElementsByClassName('category_btn');
-            for (var i=0; i<categories.length; i++)
-                if (probdata.children[8].innerHTML == categories[i].innerHTML)
+            for (var i=0; i<categories.length; i++) {
+                if (probdata.children[8].innerHTML == categories[i].innerHTML) {
                     categories[i].className = "category_btn btn btn-success active";
+                    document.getElementById("ProbCategory").value = categories[i].innerHTML;
+                }
+                else {
+                    categories[i].className="category_btn btn btn-default";
+                }
+            }
 
 
             window.location.href='#ProbTitle';
@@ -52,11 +67,14 @@
             document.getElementById('ProbImage').value = "";
             document.getElementById('ProbImageLabel').innerHTML = "jpg, bmp, gif, jpeg, png 만 업로드 가능합니다.";
             document.getElementById('ProbFile').value = "";
-            document.getElementById('ProbFileLabel').innerHTML = "";
-
+            document.getElementById('ProbFileLabel').innerHTML = "5MB 까지 업로드 가능합니다.";
+            document.getElementById('UploadedImage').src = "";
             var Switch = document.getElementById('ProbOnOffSwitch');
             var data = document.getElementById('ProbOnOff');
             ProbOn(Switch, data);
+            var btns = document.getElementsByClassName('category_btn');
+            for(var i=0; i<btns.length; i++)
+                btns[i].className="category_btn btn btn-default";
             return false;
         }
 
@@ -87,7 +105,7 @@
                 alert('문제 설명을 입력하지 않았습니다.');
             }
             else if(document.getElementById('ProbImage').value != ""){
-                if(IMG_FORMAT.indexOf(document.getElementById('ProbImage').value) == -1){
+                if(IMG_FORMAT.indexOf(document.getElementById('ProbImage').value) != -1){
                     alert('이미지는 jpg, bmp, gif, jpeg, png 만 업로드 가능합니다.');
                     no_input = document.getElementById('ProbImage');
                 }
@@ -102,10 +120,17 @@
         }
 
         function checkkey() {
-            var input = document.getElementById('ProbKey').value;
             var result = document.getElementById('KeyDupResult');
+            var input = document.getElementById('ProbKey').value;
+
+            if (input == probkey) {
+                result.innerHTML = "";
+                return false
+            }
+
+
             if (input == ""){
-                result.innerText="";
+                result.innerHTML="";
                 return false
             }
             var url = "dupcheck?key=" + input;
@@ -141,7 +166,9 @@
              for(var i=0; i<btns.length; i++)
                  btns[i].className="category_btn btn btn-default";
 
-             btn.className="category_btn btn btn-success active"
+             btn.className="category_btn btn btn-success active";
+            document.getElementById('ProbCategory').value = btn.innerHTML;
+
         }
 
     </script>
@@ -159,15 +186,16 @@
         </div>
         {% for prob in prob_list %}
         <div class="col-sm-4 text-center" href="#ProbTitle" onclick="set_probinfo(this)" >
-            <img class="img-responsive" src="/prob/prob_image/{{ prob.file }}" alt="Preview Image">
+            <img class="img-responsive" src="/prob/prob_image/{{ prob.image }}" alt="Preview Image">
             <h3><span>{{ prob.title }}</span></h3>
             <span hidden>{{ prob.key }}</span>
             <span hidden>{{ prob.content }}</span>
             <span hidden>{{ prob.id }}</span>
             <span hidden>{{ prob.active }}</span>
-            <span hidden>{{ prob.file }}</span>
             <span hidden>{{ prob.image }}</span>
+            <span hidden>{{ prob.file_original }}</span>
             <span hidden>{{ prob.category.title }}</span>
+            <span hidden>{{ prob.image_original }}</span>
         </div>
         {% endfor %}
         <div class="clearfix"></div>
@@ -204,7 +232,7 @@
                 <label for="ProbFile" class="col-sm-2 control-label">File</label>
                 <div class="col-sm-10">
                   <input type="file" name="probfile" class="form-control" id="ProbFile">
-                  <label for="ProbFile" id="ProbFileLabel"></label>
+                  <label for="ProbFile" id="ProbFileLabel">5MB 까지 업로드 가능합니다.</label>
                 </div>
               </div>
 
@@ -214,7 +242,7 @@
                 <div class="col-sm-10">
                   <input type="text" name="probkey" class="form-control" id="ProbKey" placeholder="Auth Key" onfocusout="checkkey()">
                     <span id="KeyDupResult">
-                    {% if keyerror == true %}
+                    {% if error == 'authkey' %}
                     사용할 수 없는 인증키 입니다.
                     {% endif %}
                     </span>
@@ -237,6 +265,9 @@
                 <input id="ProbAdd" type="hidden" name="add" value=true>
                 <input id="ProbID" type="hidden" name="id" value="none">
                 <input id="ProbOnOff" type="hidden" name="onoff" value='on'>
+                <input id="ProbCategory" type="hidden" name="category" value="">
+
+              <img id="UploadedImage" class="img-responsive" style="width: 70%; padding-left: 10%; padding-bottom: 3%;">
 
               <div class="form-group" style="width: 80%">
                 <div class="col-sm-offset-2 col-sm-10" align="right">

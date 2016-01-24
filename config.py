@@ -5,6 +5,7 @@ port = 5000
 debug = False
 SECRET_KEY = 'development-key'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+MAX_CONTENT_LENGTH = 5 * 1024 * 1024
 TRAP_BAD_REQUEST_ERRORS = True
 
 #this is test

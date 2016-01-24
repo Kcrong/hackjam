@@ -65,14 +65,6 @@ def index_rank(index):
 
 def init_db():
     db.session.rollback()
-    u = User()
-    u.userid = "asdf"
-    u.userpw = "asdf"
-    u.score = 0
-    u.nickname = "fortest"
-    u.is_admin = False
-    db.session.add(u)
-    db.session.commit()
 
     u = User()
     u.userid = "admin"
@@ -80,6 +72,7 @@ def init_db():
     u.score = 0
     u.nickname = "Administrator"
     u.is_admin = True
+    u.active = False
     db.session.add(u)
     db.session.commit()
 
@@ -98,6 +91,16 @@ def init_db():
     p.category_id = c.id
     c.prob.append(p)
     db.session.add(p)
+    db.session.commit()
+
+    u = User()
+    u.userid = "asdf"
+    u.userpw = "asdf"
+    u.score = 0
+    u.nickname = "fortest"
+    u.is_admin = False
+    u.success_prob.append(p)
+    db.session.add(u)
     db.session.commit()
 
     # Add Extra Category
