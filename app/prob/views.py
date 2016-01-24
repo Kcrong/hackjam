@@ -85,7 +85,10 @@ def upload():
                                prob_list=prob_list,
                                error=error)
     else:
-        data = request.form
+        try:
+            data = request.form
+        except RequestEntityTooLarge:
+            return redirect(url_for('.upload', error='bigfile'))
         for i in data:
             if i == 'probimage' or i == 'probfile':
                 continue
