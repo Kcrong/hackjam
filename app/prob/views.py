@@ -48,7 +48,7 @@ def saveimagefile(getfile, p):
         p.image_original = getfile.filename
         filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
         getfile.save(prob_blueprint.root_path + '/prob_images/' + filename)
-        p.image = getfile.filename
+        p.image = filename
 
 
 def saveprobfile(getfile, p):
