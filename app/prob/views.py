@@ -41,25 +41,27 @@ def list():
 def saveimagefile(getfile, p):
     if getfile.filename == '':
         if p.image is None:
-            return 'default.png'
-        else:
-            return p.image
+            p.image = 'default.png'
+            p.image_original = 'default.png'
+
     else:
+        p.image_original = getfile.filename
         filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
         getfile.save(prob_blueprint.root_path + '/prob_images/' + filename)
-        return filename
+        p.image = getfile.filename
 
 
 def saveprobfile(getfile, p):
     if getfile.filename == '':
         if p.file is None:
-            return ''
-        else:
-            return p.file
+            p.file = ''
+            p.file_original = ''
+
     else:
+        p.file_original = getfile.filename
         filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
         getfile.save(prob_blueprint.root_path + '/prob_files/' + filename)
-        return filename
+        p.file = filename
 
 
 @prob_blueprint.route('/upload', methods=['GET', 'POST'])
@@ -114,10 +116,8 @@ def upload():
             p.key = data['probkey']
         p.content = data['probcontent']
         p.maker_id = u.id
-        p.image = saveimagefile(probimage, p)
-        p.image_original = probimage.filename
-        p.file = saveprobfile(probfile, p)
-        p.file_original = probfile.filename
+        saveimagefile(probimage, p)
+        saveprobfile(probfile, p)
         p.active = onoff
         p.maker = u
         p.maker_id = u.id
