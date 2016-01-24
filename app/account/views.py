@@ -34,7 +34,7 @@ def login():
         if u is not None:
             session['login'] = True
             session['userid'] = u.userid
-            session['nickname'] = u.nickname
+            session['id'] = u.id
             session['admin'] = u.is_admin
             return redirect(url_for('main.main_index'))
         else:

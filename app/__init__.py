@@ -47,8 +47,6 @@ def user_session():
         session['login']
     except KeyError:
         session['login'] = False
-        session['userid'] = "Guest"
-        session['nickname'] = "Guest"
         session['admin'] = False
     return session
 
@@ -63,3 +61,62 @@ def template_processor():
 @app.template_filter('torank')
 def index_rank(index):
     return int(index) + 1
+
+
+def init_db():
+    db.session.rollback()
+    u = User()
+    u.userid = "asdf"
+    u.userpw = "asdf"
+    u.score = 0
+    u.nickname = "fortest"
+    u.is_admin = False
+    db.session.add(u)
+    db.session.commit()
+
+    u = User()
+    u.userid = "admin"
+    u.userpw = "test"
+    u.score = 0
+    u.nickname = "Administrator"
+    u.is_admin = True
+    db.session.add(u)
+    db.session.commit()
+
+    c = Category()
+    c.title = "Signup"
+    c.active = False
+    db.session.add(c)
+    db.session.commit()
+
+    p = Prob()
+    p.title = "Signup"
+    p.key = "Thank You For Signup"
+    p.active = False
+    p.maker_id = u.id
+    p.category = c
+    p.category_id = c.id
+    c.prob.append(p)
+    db.session.add(p)
+    db.session.commit()
+
+    # Add Extra Category
+    p = Category()
+    p.title = "Pwnable"
+    db.session.add(p)
+
+    p = Category()
+    p.title = "Web"
+    db.session.add(p)
+
+    p = Category()
+    p.title = "Network"
+    db.session.add(p)
+
+    p = Category()
+    p.title = "Forensic"
+    db.session.add(p)
+
+    db.session.commit()
+
+

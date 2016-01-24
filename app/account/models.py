@@ -21,3 +21,5 @@ class User(db.Model):
     prob = db.relationship(Prob)
     success_prob = db.relationship('Prob', secondary=success_probs,
                                    backref=db.backref('users'))
+
+

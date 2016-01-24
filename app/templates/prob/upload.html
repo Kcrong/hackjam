@@ -3,31 +3,25 @@
 {% block head %}
     <script>
         function ProbOn(Switch, data){
-            Switch.style.backgroundColor = '#5cb85c';
+            Switch.className = "btn btn-success";
             Switch.innerHTML = 'ACTIVATE';
             data.value = 'on';
         }
         function ProbOff(Switch, data){
-            Switch.style.backgroundColor = '#d9534f';
+            Switch.className = "btn btn-danger";
             Switch.innerHTML = 'DEACTIVATE';
             data.value = 'off';
         }
 
         function set_probinfo(probdata){
-            /*
-            * ProbTitle, ProbScore, ProbKey, ProbContent, ProbImage
-            */
-            // ProbTitle = id.children[1].children[0].innerText
-            // ProbScore = id.children[1].children[1].innerText
-            // ProbImage = id.children[0].src
-
             document.getElementById('ProbTitle').value = probdata.children[1].children[0].innerHTML;
-            document.getElementById('ProbScore').value = probdata.children[1].children[1].innerHTML;
             document.getElementById('ProbKey').value = probdata.children[2].innerHTML;
             document.getElementById('ProbContent').value = probdata.children[3].innerHTML;
             document.getElementById('ProbID').value = probdata.children[4].innerHTML;
             document.getElementById('ProbAdd').value = false;
             document.getElementById('SubmitButton').innerHTML = "Change";
+            document.getElementById('ProbImageLabel').innerHTML = probdata.children[6].innerHTML;
+            document.getElementById('ProbFileLabel').innerHTML = probdata.children[7].innerHTML;
             var Switch = document.getElementById('ProbOnOffSwitch');
             var data = document.getElementById('ProbOnOff');
             var active = probdata.children[5].innerHTML;
@@ -37,18 +31,29 @@
             else if(active == 'False'){
                 ProbOff(Switch, data);
             }
+
+            var categories = document.getElementsByClassName('category_btn');
+            for (var i=0; i<categories.length; i++)
+                if (probdata.children[8].innerHTML == categories[i].innerHTML)
+                    categories[i].className = "category_btn btn btn-success active";
+
+
             window.location.href='#ProbTitle';
         }
 
         function reset_form(){
             document.getElementById('ProbTitle').value = "";
-            document.getElementById('ProbScore').value = "";
+            document.getElementById('ProbFile').value = "";
             document.getElementById('ProbKey').value = "";
             document.getElementById('ProbContent').value = "";
             document.getElementById('ProbAdd').value = true;
             document.getElementById('SubmitButton').innerHTML = "Upload";
             document.getElementById('ProbID').value = "";
             document.getElementById('ProbImage').value = "";
+            document.getElementById('ProbImageLabel').innerHTML = "jpg, bmp, gif, jpeg, png 만 업로드 가능합니다.";
+            document.getElementById('ProbFile').value = "";
+            document.getElementById('ProbFileLabel').innerHTML = "";
+
             var Switch = document.getElementById('ProbOnOffSwitch');
             var data = document.getElementById('ProbOnOff');
             ProbOn(Switch, data);
@@ -67,11 +72,28 @@
         }
 
         function check_form(){
+            var IMG_FORMAT = ['bmp', 'gif', 'jpg', 'jpeg', 'png'];
             var no_input;
-            if (document.getElementById('ProbTitle').value == ""){no_input=document.getElementById('ProbTitle')}
-            else if(document.getElementById('ProbScore').value == ""){no_input=document.getElementById('ProbScore')}
-            else if(document.getElementById('ProbKey').value == ""){no_input=document.getElementById('ProbKey')}
-            else if(document.getElementById('ProbContent').value == ""){no_input=document.getElementById('ProbContent')}
+            if (document.getElementById('ProbTitle').value == ""){
+                no_input=document.getElementById('ProbTitle');
+                alert('제목을 입력하지 않았습니다.');
+            }
+            else if(document.getElementById('ProbKey').value == ""){
+                no_input=document.getElementById('ProbKey');
+                alert('인증키를 입력하지 않았습니다.');
+            }
+            else if(document.getElementById('ProbContent').value == ""){
+                no_input=document.getElementById('ProbContent');
+                alert('문제 설명을 입력하지 않았습니다.');
+            }
+            else if(document.getElementById('ProbImage').value != ""){
+                if(IMG_FORMAT.indexOf(document.getElementById('ProbImage').value) == -1){
+                    alert('이미지는 jpg, bmp, gif, jpeg, png 만 업로드 가능합니다.');
+                    no_input = document.getElementById('ProbImage');
+                }
+                else
+                    return true;
+            }
             else{
                 return true;
             }
@@ -114,6 +136,14 @@
 
         }
 
+        function category_select(btn) {
+             var btns = document.getElementsByClassName('category_btn');
+             for(var i=0; i<btns.length; i++)
+                 btns[i].className="category_btn btn btn-default";
+
+             btn.className="category_btn btn btn-success active"
+        }
+
     </script>
 {% endblock %}
 
@@ -130,11 +160,14 @@
         {% for prob in prob_list %}
         <div class="col-sm-4 text-center" href="#ProbTitle" onclick="set_probinfo(this)" >
             <img class="img-responsive" src="/prob/prob_image/{{ prob.file }}" alt="Preview Image">
-            <h3><span>{{ prob.title }}</span>&nbsp;<small>{{ prob.score }}</small></h3>
+            <h3><span>{{ prob.title }}</span></h3>
             <span hidden>{{ prob.key }}</span>
             <span hidden>{{ prob.content }}</span>
             <span hidden>{{ prob.id }}</span>
             <span hidden>{{ prob.active }}</span>
+            <span hidden>{{ prob.file }}</span>
+            <span hidden>{{ prob.image }}</span>
+            <span hidden>{{ prob.category.title }}</span>
         </div>
         {% endfor %}
         <div class="clearfix"></div>
@@ -158,11 +191,24 @@
                 </div>
               </div>
               <div class="form-group" style="width: 70%">
-                <label for="ProebScore" class="col-sm-2 control-label">Score</label>
+                <label for="InputID" class="col-sm-2 control-label">Category</label>
                 <div class="col-sm-10">
-                  <input type="number" name="probscore" class="form-control" id="ProbScore" placeholder="Prob Score">
+                    {% for category in category_list %}
+                    <button onclick="category_select(this)" type="button" class="category_btn btn btn-default">{{ category.title }}</button>
+                    {% endfor %}
                 </div>
               </div>
+
+
+              <div class="form-group" style="width: 70%">
+                <label for="ProbFile" class="col-sm-2 control-label">File</label>
+                <div class="col-sm-10">
+                  <input type="file" name="probfile" class="form-control" id="ProbFile">
+                  <label for="ProbFile" id="ProbFileLabel"></label>
+                </div>
+              </div>
+
+
               <div class="form-group" style="width: 70%">
                 <label for="ProbKey" class="col-sm-2 control-label">Key</label>
                 <div class="col-sm-10">
@@ -183,8 +229,8 @@
               <div class="form-group" style="width: 70%">
                 <label for="ProbImage" class="col-sm-2 control-label">ProbImage</label>
                 <div class="col-sm-10">
-                  <input type="file" name="probimage" id="ProbImage">
-                    <p class="help-block"><strong>이미지파일</strong>만 업로드 해주세요.</p>
+                  <input type="file" class="form-control" name="probimage" id="ProbImage">
+                    <label for="probimage" id="ProbImageLabel">jpg, bmp, gif, jpeg, png 만 업로드 가능합니다.</label>
                 </div>
               </div>
 
@@ -194,7 +240,7 @@
 
               <div class="form-group" style="width: 80%">
                 <div class="col-sm-offset-2 col-sm-10" align="right">
-                  <button style="background-color: #5cb85c" id="ProbOnOffSwitch" class="btn btn-default" onclick="return ProbSwitching()">ACTIVATE</button>
+                  <button id="ProbOnOffSwitch" class="btn btn-success" onclick="return ProbSwitching()">ACTIVATE</button>
                   <button id="ResetButton" class="btn btn-default" onclick="return reset_form()">Reset</button>
                   <button id="SubmitButton" type="submit" class="btn btn-default" >Upload</button>
                 </div>

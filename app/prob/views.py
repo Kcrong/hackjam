@@ -13,19 +13,15 @@ from .. import db
 
 
 def randomkey(length):
-    return ''.join(random.choice(string.lowercase) for i in range(length))
+    result = ''.join(random.choice(string.lowercase) for i in range(length))
+    return result[:3000]
 
 
 @prob_blueprint.route('/list')
 def list():
     from ..account.models import User
 
-    all_user = db.session.query(User).filter_by(active=True).all()
-
-    for user in all_user:
-        for prob in user.prob:
-            if prob.active is False:
-                user.prob.pop(user.prob.index(prob))
+    all_category = db.session.query(Category).join(Prob).filter_by(active=True).all()
 
     try:
         if session['login'] is True:
@@ -38,20 +34,16 @@ def list():
         success_prob = []
 
     return render_template('prob.html',
-                           user_data=all_user,
+                           category_data=all_category,
                            success=success_prob)
 
 
-def addfile(f, p):
-    if f.filename == '':
-        if p.file is None:
-            return "default.png"
-        else:
-            return p.file
+def saveimagefile(getfile):
+    if getfile.filename == '':
+        return 'default.png'
     else:
-        filetype = '.' + f.filename.split('.')[-1]
-        filename = randomkey(len(f.filename)) + filetype
-        f.save(prob_blueprint.root_path + '/prob_images/' + filename)
+        filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
+        getfile.save(prob_blueprint.root_path + '/prob_images/' + filename)
         return filename
 
 
@@ -66,55 +58,51 @@ def upload():
         return redirect(url_for('account.login'))
 
     if request.method == 'GET':
-        error = False
         try:
             if request.args['error'] == 'authkey':
                 error = True
         except BadRequestKeyError:
-            pass
+            error = False
 
-        prob_list = db.session.query(Prob).filter_by(maker_nick=session['nickname']).all()
+        prob_list = db.session.query(Prob).filter_by(maker_id=session['id']).all()
+        category_list = db.session.query(Category).filter_by(active=True).all()
         return render_template('upload.html',
+                               category_list=category_list,
                                prob_list=prob_list,
                                keyerror=error)
     else:
+        # 문제 추가 백엔드 작업만 하면됨.
+        # 프론트 완료
         data = request.form
         for i in data:
-            if i == 'probimage':
+            if i == 'probimage' or i == 'probfile':
                 continue
             elif data[i] == '':
                 return redirect(url_for('.upload'))
+
         if data['onoff'] == 'on':
             onoff = True
         elif data['onoff'] == 'off':
             onoff = False
-        f = request.files['probimage']
 
         p = db.session.query(Prob).filter_by(id=data['id']).first()
+        u = db.session.query(User).filter_by(id=session['id']).first()
 
         if p is None or data['add'] == 'true':
-            u = db.session.query(User).filter_by(userid=session['userid'], nickname=session['nickname']).first()
             p = Prob()
-            p.title = data['probtitle']
-            p.score = abs(int(data['probscore']))
-            p.key = data['probkey']
-            p.content = data['probcontent']
-            p.maker_id = u.id
-            p.maker_nick = u.nickname
-            p.maker = u
-            p.file = addfile(f, p)
-            p.active = onoff
-
             db.session.add(p)
 
-        else:
-            p.title = data['probtitle']
-            p.score = data['probscore']
-            if p.key != data['probkey']:
-                p.key = data['probkey']
-            p.content = data['probcontent']
-            p.file = addfile(f, p)
-            p.active = onoff
+        p.title = data['probtitle']
+        if p.key != data['probkey']:
+            p.key = data['probkey']
+        p.content = data['probcontent']
+        p.maker_id = u.id
+        p.image = saveimagefile(request.files['probimage'])
+        p.file = saveprobfile(request.files['probfile'])
+        p.active = onoff
+        p.maker = u
+        p.maker_id = u.id
+
         try:
             db.session.commit()
         except IntegrityError:
@@ -154,7 +142,7 @@ def auth():
                 return render_template('auth.html',
                                        error='dup')
             u.success_prob.append(p)
-            u.score = (int(u.score) + int(p.score))
+            u.score = int(u.score) + 1
             db.session.commit()
             return render_template('auth.html',
                                    error='false',

@@ -10,18 +10,18 @@
 <div class="row">
 
 
-{% for user in user_data %}
-    {% if user.prob|length != 0 %}
+{% for category in category_data %}
+    {% if category.prob|length != 0 %}
     <div class="box">
         <div class="col-lg-12">
             <hr>
             <h2 class="intro-text text-center">
-                <strong>{{ user.nickname }}</strong>&nbsp;'s prob
+                <strong>{{ category.title }}</strong>
             </h2>
             <hr>
         </div>
 
-        {% for prob in user.prob %}
+        {% for prob in category.prob %}
             {% if prob.active == true %}
             <div class="col-sm-4 text-center" data-toggle="modal" data-target="#{{ prob.id }}">
                 {% if prob in success %}
