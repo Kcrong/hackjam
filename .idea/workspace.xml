@@ -2,38 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f61ac080-6bdd-4a57-a441-450c65edf4b9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/templates/main/about_admin.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/alazbkzwicbpozisevtfhr.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/bitvtwoqj.CodeLinux" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/enkmpp.cookie" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/eyidxvfxgmillbjfftkbevbs.gh';ls" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/fqllj.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/frvknjfiz.CodeLinux" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/gsjmdewvyzmtpzbefje.gh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/hrglcttnhgdmubftzzsaq.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/ltazotvgmvgiyqrabdn.gh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/qdiuedlyocaapbcihenrw.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/qobdkyxrsnouviserpfac.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/shnbeh.cookie" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/ugpuhhhaurzootvzuri.gh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/vvbboolau.CodeLinux" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_files/ztrahyd.PNG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/fwfgjwcvvkygnhujxowol.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/lvsqtfzfamwjcxkivfxtoxdyntovyeksfqbqi.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/mxbgoen.PNG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/pgtroi.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/srthjvjxwvszwsbyanunrkdndmjmhuixjjjhj.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/uilkbamkxocsgznsidxyonlomcvjifejdwhzn.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/veaiv.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/prob_images/xdprqvyyzxemqcapollwi.png" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/prob/prob_images/plxnkmxh.png" afterPath="$PROJECT_DIR$/app/prob/prob_files/default.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/__init__.py" afterPath="$PROJECT_DIR$/app/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/main/views.py" afterPath="$PROJECT_DIR$/app/main/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/prob/models.py" afterPath="$PROJECT_DIR$/app/prob/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/prob/views.py" afterPath="$PROJECT_DIR$/app/prob/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/main/index.html" afterPath="$PROJECT_DIR$/app/templates/main/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage.py" afterPath="$PROJECT_DIR$/manage.py" />
     </list>
     <ignored path="wargame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,12 +55,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6390532">
-              <caret line="48" column="52" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="52" />
+            <state vertical-scroll-proportion="-7.3333335">
+              <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8651685">
+              <caret line="134" column="21" selection-start-line="134" selection-start-column="21" selection-end-line="134" selection-end-column="21" />
+              <folding>
+                <element signature="e#45#55#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,10 +127,10 @@
         <option value="$PROJECT_DIR$/app/prob/views.py" />
         <option value="$PROJECT_DIR$/manage.py" />
         <option value="$PROJECT_DIR$/app/prob/models.py" />
-        <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/main/views.py" />
         <option value="$PROJECT_DIR$/app/templates/main/about_admin.html" />
         <option value="$PROJECT_DIR$/app/templates/main/index.html" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
       </list>
     </option>
   </component>
@@ -1155,7 +1137,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457187286101</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="add whoami page">
+      <created>1457190255833</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1457190255833</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1209,7 +1197,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="Fix __init__.py importing Prob()" />
     <MESSAGE value="Move code location from __init__ -&gt; create_init_db" />
     <MESSAGE value="Auth 에 로그인 검사 로직 추가" />
     <MESSAGE value="try~except 까지 묶어놓음." />
@@ -1234,7 +1221,8 @@
     <MESSAGE value="remove time stamp source" />
     <MESSAGE value="add user created_time, updated_time" />
     <MESSAGE value="자기 문제는 인증을 막음" />
-    <option name="LAST_COMMIT_MESSAGE" value="자기 문제는 인증을 막음" />
+    <MESSAGE value="add whoami page" />
+    <option name="LAST_COMMIT_MESSAGE" value="add whoami page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1294,14 +1282,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/account/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1598,19 +1578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/14b90ed/483b3cc2-5af2-4bd3-b7c8-f601d6f4107d/wargame.user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/main/about_admin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3195266">
@@ -1656,16 +1623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29213482">
-          <caret line="122" column="18" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
-          <folding>
-            <element signature="e#45#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64044946">
@@ -1690,11 +1647,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="dbDummy://dbtable:/14b90ed/483b3cc2-5af2-4bd3-b7c8-f601d6f4107d/wargame.user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/14b90ed/483b3cc2-5af2-4bd3-b7c8-f601d6f4107d/wargame.category">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6390532">
-          <caret line="48" column="52" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="52" />
+        <state vertical-scroll-proportion="-7.3333335">
+          <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8651685">
+          <caret line="134" column="21" selection-start-line="134" selection-start-column="21" selection-end-line="134" selection-end-column="21" />
+          <folding>
+            <element signature="e#45#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

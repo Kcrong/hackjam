@@ -125,6 +125,10 @@ def init_db():
     db.session.add(p)
 
     p = Category()
+    p.title = "Reversing"
+    db.session.add(p)
+
+    p = Category()
     p.title = "ETC"
     db.session.add(p)
 
