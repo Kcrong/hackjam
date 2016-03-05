@@ -79,7 +79,6 @@ def dupcheck():
 
 @account_blueprint.route('/useradd', methods=['POST'])
 def useradd():
-    from ..prob.models import Prob
     # userid
     # userpw
     # nickname
@@ -108,10 +107,14 @@ def logout():
     session['admin'] = False
     return redirect(url_for('.login'))
 
+def test(tmp):
+    for i in tmp:
+        print i.score, i.updated
+
 
 @account_blueprint.route('/rank')
 def rank():
-    rank = db.session.query(User).filter_by(active=True).order_by(desc('score')).all()
+    rank = User.query.filter_by(active=True).order_by(desc('score'), 'updated').all()
     return render_template('rank.html',
                            rank=rank,
                            rank_cnt=len(rank))

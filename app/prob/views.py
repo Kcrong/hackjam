@@ -6,7 +6,7 @@ import string
 from flask import render_template, request, session, redirect, url_for
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
-
+from sqlalchemy import desc
 from ..models import *
 from . import prob_blueprint
 
@@ -63,7 +63,6 @@ def saveprobfile(getfile, p):
 
 @prob_blueprint.route('/upload', methods=['GET', 'POST'])
 def upload():
-    from ..account.models import User
 
     try:
         if session['login'] is not True:
@@ -145,7 +144,6 @@ def auth():
                                        error='login')
         except KeyError:
             return redirect(url_for('account.login'))
-        from ..account.models import User
 
         key = request.form['authkey']
         p = db.session.query(Prob).filter_by(key=key).first()
@@ -187,10 +185,10 @@ def dupcheck():
 def talking():
 
     if session['login'] is False:
-        return redirect(url_for('user.login'))
+        return redirect(url_for('account.login'))
 
     if request.method == 'GET':
-        all_talk = Talk.query.filter_by(active=True).all()
+        all_talk = Talk.query.filter_by(active=True).order_by(desc('id')).all()
         return render_template('talk.html',
                                all_talk=all_talk)
 
