@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from flask import render_template, request, redirect, url_for, session
-from .. import db
-from . import account_blueprint
-from .models import User
-from werkzeug.exceptions import BadRequestKeyError
+from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy import desc
+from werkzeug.exceptions import BadRequestKeyError
+
+from . import account_blueprint
+from ..models import *
 
 
 @account_blueprint.route('/login', methods=['GET', 'POST'])

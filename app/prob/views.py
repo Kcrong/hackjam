@@ -6,11 +6,9 @@ import string
 from flask import render_template, request, session, redirect, url_for
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
-from datetime import datetime
 
-from models import *
+from ..models import *
 from . import prob_blueprint
-from .. import db
 
 
 def randomkey(length):
@@ -20,8 +18,6 @@ def randomkey(length):
 
 @prob_blueprint.route('/list')
 def list():
-    from ..account.models import User
-
     all_category = db.session.query(Category).filter_by(active=True).all()
 
     try:
@@ -185,3 +181,24 @@ def dupcheck():
     else:
 
         return 'false'
+
+
+@prob_blueprint.route('/talk', methods=['GET', 'POST'])
+def talking():
+
+    if session['login'] is False:
+        return redirect(url_for('user.login'))
+
+    if request.method == 'GET':
+        all_talk = Talk.query.filter_by(active=True).all()
+        return render_template('talk.html',
+                               all_talk=all_talk)
+
+    elif request.method == 'POST':
+        content = request.form['talk']
+        user = User.query.filter_by(userid=session['userid']).first()
+
+        db.session.add(Talk(content, user))
+        db.session.commit()
+
+        return redirect(url_for('prob.talking'))

@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask import render_template, send_from_directory, redirect, url_for, session
+from flask import render_template, send_from_directory, redirect, url_for
 
 from . import main_blueprint
-from .. import app
 
 
 @main_blueprint.route('/')

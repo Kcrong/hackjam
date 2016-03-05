@@ -32,10 +32,8 @@ def create_app():
 app = create_app()
 db = SQLAlchemy(app)
 
-import account.models
-import prob.models
-from account.models import *
-from prob.models import *
+import models
+from .models import *
 
 migrate = Migrate(app, db)
 
