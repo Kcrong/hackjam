@@ -1,8 +1,8 @@
 SQLALCHEMY_DATABASE_URI = 'mysql://wargame:wargame123@localhost:3306/wargame?charset=utf8'
 
-host = '0.0.0.0'
-port = 5000
-debug = True
+HOST = '0.0.0.0'
+PORT = 10101
+SERVER_NAME = HOST + ':' + str(PORT)
 SECRET_KEY = 'development-key'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 MAX_CONTENT_LENGTH = 5 * 1024 * 1024
