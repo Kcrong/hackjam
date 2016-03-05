@@ -7,6 +7,8 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 
+from werkzeug.contrib.fixers import ProxyFix
+
 app = Flask(__name__)
 db = SQLAlchemy()
 
@@ -22,6 +24,7 @@ def create_app():
     app.register_blueprint(prob_blueprint, url_prefix='/prob')
 
     app.config.from_pyfile('../config.py')
+    app.wsgi_app = ProxyFix(app.wsgi_app)
 
     return app
 
