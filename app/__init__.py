@@ -7,7 +7,6 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from werkzeug.contrib.fixers import ProxyFix
 
 app = Flask(__name__)
 db = SQLAlchemy()
