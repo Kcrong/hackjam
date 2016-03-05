@@ -6,7 +6,7 @@ from werkzeug.exceptions import BadRequestKeyError
 
 account_blueprint = Blueprint('account', __name__, template_folder='../templates/account/')
 
-
+"""
 @account_blueprint.before_request
 def account_before_request():
     if request.method == 'POST':
@@ -34,6 +34,6 @@ def account_before_request():
                 redirect_url = request.url + '?time=' + session['time']
             session['time'] = 0
             return redirect(redirect_url)
-
+"""
 
 from . import views

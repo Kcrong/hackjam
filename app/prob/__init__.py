@@ -7,7 +7,7 @@ from werkzeug.exceptions import BadRequestKeyError
 
 prob_blueprint = Blueprint('prob', __name__, template_folder='../templates/prob/')
 
-
+"""
 @prob_blueprint.before_request
 def prob_before_request():
     if request.method == 'POST':
@@ -35,5 +35,5 @@ def prob_before_request():
                 redirect_url = request.url + '?time=' + session['time']
             session['time'] = 0
             return redirect(redirect_url)
-
+"""
 from . import views
