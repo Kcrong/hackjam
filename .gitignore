@@ -7,11 +7,12 @@ __pycache__/
 .idea/*
 # C extensions
 *.so
-
+*~
 # Distribution / packaging
 .Python
 migrations/
 wargame_env/
+.idea/
 env/
 build/
 develop-eggs/
