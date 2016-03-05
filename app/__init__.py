@@ -24,7 +24,6 @@ def create_app():
     app.register_blueprint(prob_blueprint, url_prefix='/prob')
 
     app.config.from_pyfile('../config.py')
-    app.wsgi_app = ProxyFix(app.wsgi_app)
 
     return app
 
