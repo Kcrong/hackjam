@@ -3,6 +3,7 @@
 
 from .. import db
 from ..prob.models import Prob
+from datetime import datetime
 
 success_probs = db.Table('success_probs',
                          db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -21,5 +22,7 @@ class User(db.Model):
     prob = db.relationship(Prob)
     success_prob = db.relationship('Prob', secondary=success_probs,
                                    backref=db.backref('users'))
+    created = db.Column(db.DATETIME, default=datetime.now(), nullable=False)
+    updated = db.Column(db.DATETIME, default=datetime.now(), nullable=False, onupdate=datetime.now())
 
 
