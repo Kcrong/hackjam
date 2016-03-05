@@ -25,3 +25,7 @@ class Category(db.Model):
     title = db.Column(db.String(100))
     prob = db.relationship(Prob)
     active = db.Column(db.BOOLEAN, default=True)
+
+    @property
+    def probes(self):
+        return db.object_session(self).query(Prob).filter_by(active=True).with_parent(self).all()

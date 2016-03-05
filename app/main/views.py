@@ -39,3 +39,13 @@ def font_static(filename):
 @main_blueprint.route('/favicon.ico')
 def favicon():
     return send_from_directory(app.root_path + '/static/', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+@main_blueprint.route('/prob_image/<path:filename>')
+def prob_image(filename):
+    return send_from_directory(main_blueprint.root_path + '/../prob/prob_images/', filename)
+
+
+@main_blueprint.route('/upload_files/<path:filename>')
+def prob_file(filename):
+    return send_from_directory(main_blueprint.root_path + '/../prob/prob_files/', filename)

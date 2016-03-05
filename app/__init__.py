@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import sys
+
 from flask import Flask, session
-from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
-import sys
+from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -55,6 +56,10 @@ def user_session():
 def index_rank(index):
     return int(index) + 1
 
+@app.teardown_request
+def refresh_db(exception=None):
+    db.session.remove()
+    db.create_scoped_session()
 
 def init_db():
     db.session.rollback()
@@ -124,4 +129,3 @@ def init_db():
         os.makedirs('./prob/prob_files', mode=777)
     if not os.path.exists('./prob/prob_images'):
         os.makedirs('./prob/prob_images', mode=777)
-

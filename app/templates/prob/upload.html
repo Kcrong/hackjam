@@ -188,7 +188,7 @@
         </div>
         {% for prob in prob_list %}
         <div class="col-sm-4 text-center" href="#ProbTitle" onclick="set_probinfo(this)" >
-            <img class="img-responsive" src="/prob/prob_image/{{ prob.image }}" alt="Preview Image">
+            <img class="img-responsive" src="/prob_image/{{ prob.image }}" alt="Preview Image">
             <h3><span>{{ prob.title }}</span></h3>
             <span hidden>{{ prob.key }}</span>
             <span hidden>{{ prob.content }}</span>
@@ -224,7 +224,7 @@
                 <label for="InputID" class="col-sm-2 control-label">Category</label>
                 <div class="col-sm-10">
                     {% for category in category_list %}
-                    <button onclick="category_select(this)" type="button" class="category_btn btn btn-default">{{ category.title }}</button>
+                        <button onclick="category_select(this)" type="button" class="category_btn btn btn-default">{{ category.title }}</button>
                     {% endfor %}
                 </div>
               </div>

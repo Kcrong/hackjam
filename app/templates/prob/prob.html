@@ -11,7 +11,7 @@
 
 
 {% for category in category_data %}
-    {% if category.prob|length != 0 %}
+    {% if category.probes|length != 0 %}
     <div class="box">
         <div class="col-lg-12">
             <hr>
@@ -21,15 +21,14 @@
             <hr>
         </div>
 
-        {% for prob in category.prob %}
-            {% if prob.active == true %}
-            <div class="col-sm-4 text-center" data-toggle="modal" data-target="#{{ prob.id }}">
+        {% for prob in category.probes %}
+            <div class="col-sm-3 text-center" data-toggle="modal" data-target="#{{ prob.id }}">
                 {% if prob in success %}
-                <img style="border: 8px dotted black;" class="img-responsive" src="/prob/prob_image/{{ prob.image }}" alt="Preview Image">
+                <img style="width: 150px; height: auto; border: 8px dotted black;" class="img-thumbnail" src="/prob_image/{{ prob.image }}" alt="Preview Image">
                 {% else %}
-                <img class="img-responsive" src="/prob/prob_image/{{ prob.image }}" alt="Preview Image">
+                <img style="width: 150px; height: auto;" class="img-thumbnail" src="/prob_image/{{ prob.image }}" alt="Preview Image">
                 {% endif %}
-                <h3><span>{{ prob.title }}</span>&nbsp;<small>{{ prob.score }}</small></h3>
+                <h3><span>{{ prob.title }}</span></h3>
                 <span hidden>{{ prob.key }}</span>
                 <span hidden>{{ prob.content }}</span>
                 <span hidden>{{ prob.id }}</span>
@@ -39,11 +38,11 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{{ prob.title }}&nbsp;({{ prob.score }})</h4>
+                    <h4 class="modal-title">{{ prob.title }}&nbsp;<small>made by&nbsp;{{ prob.maker.nickname }}</small></h4>
                   </div>
                   <div class="modal-body">
                     <textarea style="border: 0;background-color: transparent;width: 100%;height: 200px" disabled>{{ prob.content }}</textarea>
-                      <a href="/prob/upload_files/{{ prob.file }}">{{ prob.file_original }}</a>
+                      <a href="/upload_files/{{ prob.file }}">{{ prob.file_original }}</a>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -51,8 +50,6 @@
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-            {% endif %}
-
         {% endfor %}
 
         <div class="clearfix"></div>

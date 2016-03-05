@@ -6,6 +6,7 @@ from . import account_blueprint
 from .models import User
 from werkzeug.exceptions import BadRequestKeyError
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
 
 
@@ -23,6 +24,9 @@ def login():
             elif error == "nickname":
                 return render_template('login.html',
                                        nickerror=u"사용할 수 없는 닉네임 입니다.")
+            elif error == 'None':
+                return render_template('login.html',
+                                       success=True)
             else:
                 pass
 
@@ -30,16 +34,20 @@ def login():
 
     else:
         data = request.form
-        u = db.session.query(User).filter_by(userid=data['userid'], userpw=data['userpw'], active=True).first()
-        if u is not None:
+
+        try:
+
+            u = db.session.query(User).filter_by(userid=data['userid'], userpw=hash(data['userpw']), active=True).one()
+            
+        except NoResultFound:
+            return render_template('login.html',
+                                   loginerror=True)
+        else:
             session['login'] = True
             session['userid'] = u.userid
             session['id'] = u.id
             session['admin'] = u.is_admin
             return redirect(url_for('main.main_index'))
-        else:
-            return render_template('login.html',
-                                   loginerror=True)
 
 
 @account_blueprint.route('/dupcheck', methods=['GET'])
@@ -51,15 +59,19 @@ def dupcheck():
     except BadRequestKeyError:
         # nick dup check
         if db.session.query(User).filter_by(nickname=request.args['nick']).first() is not None:
+            
             return "true"
         else:
+            
             return "false"
 
     else:
         # id dup check
         if db.session.query(User).filter_by(nickname=userid).first() is not None:
+            
             return "true"
         else:
+            
             return "false"
 
 
@@ -71,18 +83,19 @@ def useradd():
     # nickname
     u = User()
     u.userid = request.form['userid']
-    u.userpw = request.form['userpw']
+    u.userpw = hash(request.form['userpw'])
     u.nickname = request.form['nickname']
     u.success_prob.append(db.session.query(Prob).filter_by(title="signup").first())
     db.session.add(u)
     try:
         db.session.commit()
+        
     except IntegrityError, e:
         db.session.rollback()
         dupkey = e[0].split('for key')[1].split("'")[1]
         return redirect(url_for('account.login', error=dupkey))
     else:
-        return redirect(url_for('account.login'))
+        return redirect(url_for('account.login', error='None'))
 
 
 @account_blueprint.route('/logout')
