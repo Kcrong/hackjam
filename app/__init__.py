@@ -56,10 +56,13 @@ def user_session():
 def index_rank(index):
     return int(index) + 1
 
+
+# for error 'mysql server gone'
 @app.teardown_request
 def refresh_db(exception=None):
     db.session.remove()
     db.create_scoped_session()
+
 
 def init_db():
     db.session.rollback()

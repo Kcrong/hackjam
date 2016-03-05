@@ -32,7 +32,7 @@ def list():
     except KeyError:
         session['login'] = False
         success_prob = []
-    
+
     return render_template('prob.html',
                            category_data=all_category,
                            success=success_prob)
@@ -82,7 +82,7 @@ def upload():
 
         prob_list = db.session.query(Prob).filter_by(maker_id=session['id']).all()
         category_list = db.session.query(Category).filter_by(active=True).all()
-        
+
         return render_template('upload.html',
                                category_list=category_list,
                                prob_list=prob_list,
@@ -127,16 +127,13 @@ def upload():
 
         try:
             db.session.commit()
-            
+
         except IntegrityError:
             db.session.rollback()
-            
+
             return redirect(url_for('.upload', error='authkey') + '#ProbTitle')
 
         return redirect(url_for('.upload'))
-
-
-
 
 
 @prob_blueprint.route('/auth', methods=['GET', 'POST'])
@@ -155,21 +152,20 @@ def auth():
         key = request.form['authkey']
         p = db.session.query(Prob).filter_by(key=key).first()
         if p is None:
-            
+
             return render_template('auth.html',
                                    error='true')
         else:
             from ..account.models import User
             u = db.session.query(User).filter_by(userid=session['userid']).first()
-            
+
             if p in u.success_prob:
-                
                 return render_template('auth.html',
                                        error='dup')
             u.success_prob.append(p)
             u.score = int(u.score) + 1
             db.session.commit()
-            
+
             return render_template('auth.html',
                                    error='false',
                                    title=p.title)
@@ -179,8 +175,8 @@ def auth():
 def dupcheck():
     key = request.args['key']
     if db.session.query(Prob).filter_by(key=key).first() is not None:
-        
+
         return 'true'
     else:
-        
+
         return 'false'

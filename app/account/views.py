@@ -20,10 +20,10 @@ def login():
         else:
             if error == "userid":
                 return render_template('login.html',
-                                       iderror=u"사용할 수 없는 아이디 입니다.")
+                                       useradd_error=u"사용할 수 없는 아이디 입니다.")
             elif error == "nickname":
                 return render_template('login.html',
-                                       nickerror=u"사용할 수 없는 닉네임 입니다.")
+                                       useradd_error=u"사용할 수 없는 닉네임 입니다.")
             elif error == 'None':
                 return render_template('login.html',
                                        success=True)

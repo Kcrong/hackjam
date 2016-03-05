@@ -36,8 +36,4 @@ def account_before_request():
             return redirect(redirect_url)
 
 
-
-
-
-
 from . import views
