@@ -7,7 +7,7 @@ from app import init_db
 
 @manager.command
 def run():
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
 
 
 @manager.command

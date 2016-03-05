@@ -1,2 +1,0 @@
-<?php
-  for($i=0;$i<70;$i++) echo "a<br>";

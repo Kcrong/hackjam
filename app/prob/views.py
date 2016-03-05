@@ -160,7 +160,6 @@ def auth():
         elif p.maker_id == u.id:
             return render_template('auth.html',
                                    error='mine')
-
         else:
             if p in u.success_prob:
                 return render_template('auth.html',

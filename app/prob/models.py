@@ -17,7 +17,7 @@ class Prob(db.Model):
     file = db.Column(db.String(3000))
     file_original = db.Column(db.String(300))
     category = db.relationship('Category')
-    category_id = db.Column(db.INTEGER, db.ForeignKey('category.id'), nullable=False)
+    category_id = db.Column(db.INTEGER, db.ForeignKey('category.id'))
 
 
 class Category(db.Model):

@@ -132,6 +132,6 @@ def init_db():
 
     import os
     if not os.path.exists('./prob/prob_files'):
-        os.makedirs('./prob/prob_files', mode=777)
+        print "make ./prob/prob_files directory!"
     if not os.path.exists('./prob/prob_images'):
-        os.makedirs('./prob/prob_images', mode=777)
+        print "make ./prob/prob_images directory!"

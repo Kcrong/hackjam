@@ -16,6 +16,11 @@ def index():
     return render_template('index.html')
 
 
+@main_blueprint.route('/whoami')
+def aboutme():
+    return render_template('about_admin.html')
+
+
 @main_blueprint.route('/prob_image/<path:filename>')
 def prob_image(filename):
     return send_from_directory(main_blueprint.root_path + '/../prob/prob_images/', filename)
