@@ -6,6 +6,7 @@ import string
 from flask import render_template, request, session, redirect, url_for
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
+from datetime import datetime
 
 from models import *
 from . import prob_blueprint
@@ -164,8 +165,10 @@ def auth():
             if p in u.success_prob:
                 return render_template('auth.html',
                                        error='dup')
+
             u.success_prob.append(p)
             u.score = int(u.score) + 1
+            u.updated = datetime.now()
             db.session.commit()
 
             return render_template('auth.html',
