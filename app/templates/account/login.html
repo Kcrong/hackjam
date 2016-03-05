@@ -4,14 +4,14 @@
     <script>
         var idcheck = false;
         var nickcheck = false;
-    </script>
+      </script>
 
     {% if loginerror == True %}
         <script>alert("아이디 혹은 비밀번호가 잘못 입력되었습니다.")</script>
     {% elif success == True %}
         <script>alert("회원가입이 완료되었습니다.")</script>
     {% elif useradd_error == True %}
-        <script>alert('{{ useradd_error_message }}')</script>
+        <script>alert({{ useradd_error_message }})</script>
     {% endif %}
 
 
