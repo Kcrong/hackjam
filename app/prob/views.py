@@ -148,17 +148,20 @@ def auth():
                                        error='login')
         except KeyError:
             return redirect(url_for('account.login'))
+        from ..account.models import User
 
         key = request.form['authkey']
         p = db.session.query(Prob).filter_by(key=key).first()
-        if p is None:
+        u = db.session.query(User).filter_by(userid=session['userid']).first()
 
+        if p is None:
             return render_template('auth.html',
                                    error='true')
-        else:
-            from ..account.models import User
-            u = db.session.query(User).filter_by(userid=session['userid']).first()
+        elif p.maker_id == u.id:
+            return render_template('auth.html',
+                                   error='mine')
 
+        else:
             if p in u.success_prob:
                 return render_template('auth.html',
                                        error='dup')

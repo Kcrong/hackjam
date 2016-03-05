@@ -9,6 +9,8 @@
         <script>alert('이미 인증한 문제입니다.')</script>
     {% elif error == 'login' %}
         <script>alert('로그인이 필요합니다!')</script>
+    {% elif error == 'mine' %}
+        <script>alert('자신이 낸 문제는 인증할 수 없습니다!')</script>
     {% endif %}
 {% endblock %}
 
