@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f61ac080-6bdd-4a57-a441-450c65edf4b9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/templates/prob/talk.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/account/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/prob/models.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/__init__.py" afterPath="$PROJECT_DIR$/app/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/account/views.py" afterPath="$PROJECT_DIR$/app/account/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/main/views.py" afterPath="$PROJECT_DIR$/app/main/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/prob/views.py" afterPath="$PROJECT_DIR$/app/prob/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/main/index.html" afterPath="$PROJECT_DIR$/app/templates/main/index.html" />
     </list>
     <ignored path="wargame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,7 +17,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/wargame$wargame.coverage" NAME="wargame Coverage Results" MODIFIED="1457203489121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/wargame$wargame.coverage" NAME="wargame Coverage Results" MODIFIED="1457204368888" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -58,11 +51,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="talk.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4909091">
+              <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+              <folding>
+                <element signature="e#1250#1269#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="talk.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/prob/talk.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43636364">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.333333">
+              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
               <folding>
                 <element signature="e#290#324#0#HTML" expanded="true" />
                 <element signature="e#483#501#0#HTML" expanded="true" />
@@ -75,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#24#40#0" expanded="true" />
               </folding>
@@ -87,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/app/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
               <folding>
                 <element signature="e#45#118#0" expanded="true" />
               </folding>
@@ -98,15 +103,22 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/prob/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.7419355">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="6" />
               <folding>
-                <element signature="e#45#58#0" expanded="true" />
-                <element signature="e#1039#1424#0" expanded="false" />
-                <element signature="e#1461#1818#0" expanded="false" />
-                <element signature="e#1897#4123#0" expanded="false" />
-                <element signature="e#4198#5480#0" expanded="false" />
+                <element signature="e#1066#1451#0" expanded="false" />
+                <element signature="e#1488#1845#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/account/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -157,17 +169,17 @@
         <option value="$PROJECT_DIR$/app/templates/prob/auth.html" />
         <option value="$PROJECT_DIR$/manage.py" />
         <option value="$PROJECT_DIR$/app/templates/main/about_admin.html" />
-        <option value="$PROJECT_DIR$/app/templates/main/index.html" />
-        <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/account/models.py" />
         <option value="$PROJECT_DIR$/app/prob/models.py" />
-        <option value="$PROJECT_DIR$/app/account/views.py" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/templates/main/talk.html" />
         <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/main/views.py" />
-        <option value="$PROJECT_DIR$/app/prob/views.py" />
         <option value="$PROJECT_DIR$/app/templates/prob/talk.html" />
+        <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/account/views.py" />
+        <option value="$PROJECT_DIR$/app/prob/views.py" />
+        <option value="$PROJECT_DIR$/app/templates/main/index.html" />
       </list>
     </option>
   </component>
@@ -1147,7 +1159,19 @@
       <option name="project" value="LOCAL" />
       <updated>1457201702977</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="각 blueprint 모델을 하나로 통합 및 방명록 추가">
+      <created>1457203582812</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1457203582812</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Add talk link&#10;기타 import 문제 해결">
+      <created>1457204451242</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1457204451242</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1201,8 +1225,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="main 쿼리 수정함. order_by() 뺌. 디비 트랜젝션 단위를 나눔. wsgi 파일 추가" />
-    <MESSAGE value="Complete Front-End at Upload" />
     <MESSAGE value="카테고리 정렬 방식으로 변경.&#10;문제 파일 업로드 기능 추" />
     <MESSAGE value="문제파일 다운로드 링크 기능 완료." />
     <MESSAGE value="제한된 첨부파일크기를 넘길 경우, 안내메세지 표" />
@@ -1226,7 +1248,9 @@
     <MESSAGE value="add Reversing Category" />
     <MESSAGE value="change name &quot;welovehacking&quot; -&gt; &quot;hackjam&quot;&#10;" />
     <MESSAGE value="add user solve time, remove main.model&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add user solve time, remove main.model&#10;" />
+    <MESSAGE value="각 blueprint 모델을 하나로 통합 및 방명록 추가" />
+    <MESSAGE value="Add talk link&#10;기타 import 문제 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add talk link&#10;기타 import 문제 해결" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1277,7 +1301,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="148" />
+      <option name="time" value="149" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -1286,13 +1310,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/templates/prob/auth.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1538,22 +1555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4390244">
-          <caret line="71" column="25" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8802661">
-          <caret line="60" column="9" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/14b90ed/483b3cc2-5af2-4bd3-b7c8-f601d6f4107d/wargame.prob">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1617,26 +1618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="e#45#118#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/account/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37931034">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#45#115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/14b90ed/65b3c9a0-1f64-4226-84b2-a8a390adb545/wargame.alembic_version">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1676,37 +1657,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/prob/views.py">
-      <provider selected="true" editor-type-id="text-editor">
+    <entry file="dbDummy://dbtable:/14b90ed/65b3c9a0-1f64-4226-84b2-a8a390adb545/wargame.prob">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
-          <folding>
-            <element signature="e#45#58#0" expanded="true" />
-            <element signature="e#1039#1424#0" expanded="false" />
-            <element signature="e#1461#1818#0" expanded="false" />
-            <element signature="e#1897#4123#0" expanded="false" />
-            <element signature="e#4198#5480#0" expanded="false" />
-          </folding>
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#24#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+          <folding>
+            <element signature="e#45#118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/prob/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7419355">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="6" />
+          <folding>
+            <element signature="e#1066#1451#0" expanded="false" />
+            <element signature="e#1488#1845#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/account/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2181818">
+          <caret line="77" column="49" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/prob/talk.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43636364">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.333333">
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding>
             <element signature="e#290#324#0#HTML" expanded="true" />
             <element signature="e#483#501#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4909091">
+          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+          <folding>
+            <element signature="e#1250#1269#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
