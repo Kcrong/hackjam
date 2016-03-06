@@ -25,7 +25,13 @@
             {% for talk in all_talk %}
                 <hr>
                 {{ talk.user.nickname }} : <br>
+
+                {% if talk.user.is_admin == True %}
+                <h4>{{ talk.content }}</h4>
+                {% else %}
                 {{ talk.content }}
+                {% endif %}
+
             {% endfor %}
             <hr>
         </div>
