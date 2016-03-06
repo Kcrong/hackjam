@@ -146,7 +146,7 @@ def auth():
             return redirect(url_for('account.login'))
 
         key = request.form['authkey']
-        p = db.session.query(Prob).filter_by(key=key).first()
+        p = db.session.query(Prob).filter_by(key=key, active=True).first()
         u = db.session.query(User).filter_by(userid=session['userid']).first()
 
         if p is None:
