@@ -40,7 +40,7 @@ def login():
         try:
 
             u = db.session.query(User).filter_by(userid=data['userid'], userpw=hash(data['userpw']), active=True).one()
-            
+
         except NoResultFound:
             return render_template('login.html',
                                    loginerror=True)
@@ -61,19 +61,19 @@ def dupcheck():
     except BadRequestKeyError:
         # nick dup check
         if db.session.query(User).filter_by(nickname=request.args['nick']).first() is not None:
-            
+
             return "true"
         else:
-            
+
             return "false"
 
     else:
         # id dup check
         if db.session.query(User).filter_by(nickname=userid).first() is not None:
-            
+
             return "true"
         else:
-            
+
             return "false"
 
 
@@ -82,15 +82,22 @@ def useradd():
     # userid
     # userpw
     # nickname
+
+    if len(request.form['userid']) < 6:
+        return redirect(url_for('account.login', error="userid"))
+    elif len(request.form['nickname']) < 6:
+        return redirect(url_for('account.login', error="nickname"))
+
     u = User()
     u.userid = request.form['userid']
     u.userpw = hash(request.form['userpw'])
     u.nickname = request.form['nickname']
+
     u.success_prob.append(db.session.query(Prob).filter_by(title="signup").first())
     db.session.add(u)
     try:
         db.session.commit()
-        
+
     except IntegrityError, e:
         db.session.rollback()
         dupkey = e[0].split('for key')[1].split("'")[1]
@@ -106,6 +113,7 @@ def logout():
     session['userid'] = 'Guest'
     session['admin'] = False
     return redirect(url_for('.login'))
+
 
 def test(tmp):
     for i in tmp:
