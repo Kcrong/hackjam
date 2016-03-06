@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f61ac080-6bdd-4a57-a441-450c65edf4b9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/prob/prob.html" afterPath="$PROJECT_DIR$/app/templates/prob/prob.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/account/rank.html" afterPath="$PROJECT_DIR$/app/templates/account/rank.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/main/index.html" afterPath="$PROJECT_DIR$/app/templates/main/index.html" />
     </list>
     <ignored path="wargame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -17,7 +18,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/wargame$wargame.coverage" NAME="wargame Coverage Results" MODIFIED="1457232640441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/wargame$wargame.coverage" NAME="wargame Coverage Results" MODIFIED="1457233035666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -55,11 +56,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="prob.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.3333335">
+              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rank.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/account/rank.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.40248963">
+              <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prob.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/prob/prob.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9253112">
-              <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+            <state vertical-scroll-proportion="-11.185185">
+              <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
               <folding>
                 <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -102,7 +123,6 @@
         <option value="&lt;b446cedb-2128-4c83-a3cf-b5ee8a93ec5a&gt;/wargame_bt/config.py" />
         <option value="&lt;b446cedb-2128-4c83-a3cf-b5ee8a93ec5a&gt;/wargame_bt/app/prob/views.py" />
         <option value="dbtable:/14b90ed/483b3cc2-5af2-4bd3-b7c8-f601d6f4107d/wargame.user" />
-        <option value="$PROJECT_DIR$/app/templates/account/rank.html" />
         <option value="$PROJECT_DIR$/app/templates/prob/upload.html" />
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/app/templates/account/login.html" />
@@ -122,9 +142,10 @@
         <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/account/views.py" />
         <option value="$PROJECT_DIR$/app/prob/views.py" />
-        <option value="$PROJECT_DIR$/app/templates/main/index.html" />
         <option value="dbtable:/14b90ed/483b3cc2-5af2-4bd3-b7c8-f601d6f4107d/wargame.success_probs" />
         <option value="$PROJECT_DIR$/app/templates/prob/prob.html" />
+        <option value="$PROJECT_DIR$/app/templates/main/index.html" />
+        <option value="$PROJECT_DIR$/app/templates/account/rank.html" />
       </list>
     </option>
   </component>
@@ -282,6 +303,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wargame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wargame_bt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="account" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1127,7 +1170,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457231813146</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="해당 문제를 푼 유저 목록 보기 기능 추가">
+      <created>1457232740620</created>
+      <option name="number" value="00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1457232740620</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1181,7 +1230,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="제한된 첨부파일크기를 넘길 경우, 안내메세지 표" />
     <MESSAGE value="첨부파일 경로 추가" />
     <MESSAGE value="db_init 에 경로 생성 코드 추" />
     <MESSAGE value="save~file func add db control code." />
@@ -1206,7 +1254,8 @@
     <MESSAGE value="Add talk link&#10;기타 import 문제 해결" />
     <MESSAGE value="add patch list at main" />
     <MESSAGE value="key delete!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="key delete!!!" />
+    <MESSAGE value="해당 문제를 푼 유저 목록 보기 기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="해당 문제를 푼 유저 목록 보기 기능 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1442,13 +1491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/account/rank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/account/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.019955654">
@@ -1600,14 +1642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8198758">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/prob/talk.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36645964">
@@ -1678,11 +1712,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/prob/prob.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9253112">
-          <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+        <state vertical-scroll-proportion="-11.185185">
+          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
           <folding>
             <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.3333335">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/account/rank.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40248963">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>

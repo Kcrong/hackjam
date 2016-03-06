@@ -20,12 +20,14 @@
       </thead>
       <tbody>
         {% for ranking in range(0,rank_cnt) %}
+            {% if rank[ranking].score != 0 %}
             <tr>
                 <th scope="row">{{ ranking|torank }}</th>
                 <td>{{ rank[ranking].nickname }}</td>
                 <td>{{ rank[ranking].score }}</td>
                 <td><strong>{{ rank[ranking].success_prob[-1].title }}</strong> <small>at {{ rank[ranking].success_prob[-1].category.title }}</small></td>
             </tr>
+            {% endif %}
         {% endfor %}
       </tbody>
     </table>
