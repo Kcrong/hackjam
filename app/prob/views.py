@@ -63,7 +63,6 @@ def saveprobfile(getfile, p):
 
 @prob_blueprint.route('/upload', methods=['GET', 'POST'])
 def upload():
-
     try:
         if session['login'] is not True:
             return redirect(url_for('account.login'))
@@ -183,16 +182,15 @@ def dupcheck():
 
 @prob_blueprint.route('/talk', methods=['GET', 'POST'])
 def talking():
-
-    if session['login'] is False:
-        return redirect(url_for('account.login'))
-
     if request.method == 'GET':
         all_talk = Talk.query.filter_by(active=True).order_by(desc('id')).all()
         return render_template('talk.html',
                                all_talk=all_talk)
 
     elif request.method == 'POST':
+        if session['login'] is False:
+            return redirect(url_for('account.login'))
+
         content = request.form['talk']
         user = User.query.filter_by(userid=session['userid']).first()
 

@@ -11,7 +11,9 @@
             <hr>
         </div>
         <div style="height: auto; width: 100%;" align="center">
-            이 페이지에 맞지 않는 글일 경우, 무통보 삭제됩니다.<br><br>
+            이 페이지에 맞지 않는 글일 경우, 무통보 삭제됩니다.<br>
+            로그인한 유저만 쓰기가 가능합니다.<br><br>
+            {% if session['login'] == True %}
             <form method="post" action="/prob/talk">
               <div class="form-group" style="width: 50%">
                 <input name="talk" type="text" class="form-control" id="talk_input" placeholder="말은 사람의 인격입니다.">
@@ -19,6 +21,7 @@
               </div>
                 <button type="submit" class="btn btn-default">작성</button>
             </form>
+            {% endif %}
             {% for talk in all_talk %}
                 <hr>
                 {{ talk.user.nickname }} : <br>
