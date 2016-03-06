@@ -41,6 +41,22 @@
                   </div>
                   <div class="modal-body">
                     <textarea style="border: 0;background-color: transparent;width: 100%;height: 200px" disabled>{{ prob.content }}</textarea>
+
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="solved_list_button" data-toggle="dropdown" aria-expanded="true">
+                        Solved
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                          <!-- EDIT HERE -->
+                          {% for user in prob.users %}
+                            <li role="presentation"><a role="menuitem" tabindex="-1">{{ user.nickname }}</a></li>
+                          {% endfor %}
+                      </ul>
+                    </div>
+
+
+
                       <a href="/upload_files/{{ prob.file }}">{{ prob.file_original }}</a>
                   </div>
                   <div class="modal-footer">
