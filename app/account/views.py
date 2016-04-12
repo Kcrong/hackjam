@@ -65,10 +65,9 @@ def dupcheck():
 def useradd():
     data = request.form
 
-    if len(data['userid']) < 6:
-        return redirect(url_for('account.login', error="userid"))
-    elif len(data['nickname']) < 6:
-        return redirect(url_for('account.login', error="nickname"))
+    for req_name in ['userid', 'nickname']:
+        if len(data[req_name]) < 6:
+            return redirect(url_for('account.login', error=req_name))
 
     user_datastore.create_user(userid=data['userid'],
                                userpw=data['userpw'],
