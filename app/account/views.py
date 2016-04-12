@@ -3,11 +3,16 @@
 from flask import render_template, request, redirect, url_for, session
 from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.exceptions import BadRequestKeyError
 
 from . import account_blueprint
 from ..models import *
+
+user_error_message = {
+    'userid': '사용할 수 없는 아이디 입니다.',
+    'nickname': '사용할 수 없는 닉네임 입니다.',
+    'None': '회원가입이 완료되었습니다.',
+}
 
 
 @account_blueprint.route('/login', methods=['GET', 'POST'])
@@ -18,32 +23,24 @@ def login():
         except BadRequestKeyError:
             pass
         else:
-            if error == "userid":
+            try:
                 return render_template('account/login.html',
-                                       useradd_error=True,
-                                       useradd_error_message=u"사용할 수 없는 아이디 입니다.")
-            elif error == "nickname":
-                return render_template('account/login.html',
-                                       useradd_error=True,
-                                       useradd_error_message=u"사용할 수 없는 닉네임 입니다.")
-            elif error == 'None':
-                return render_template('account/login.html',
-                                       success=True)
-            else:
+                                       alert_message=[user_error_message[error]])
+            except KeyError:
                 pass
 
         return render_template('account/login.html')
 
+    # request.method == 'POST'
     else:
         data = request.form
 
-        try:
+        u = User.query.filter_by(userid=data['userid'], userpw=hash(data['userpw']), active=True).first()
 
-            u = db.session.query(User).filter_by(userid=data['userid'], userpw=hash(data['userpw']), active=True).one()
-
-        except NoResultFound:
+        if u is None:
             return render_template('account/login.html',
-                                   loginerror=True)
+                                   alert_message=['아이디 혹은 비밀번호가 잘못 입력되었습니다.'])
+
         else:
             session['login'] = True
             session['userid'] = u.userid
@@ -88,7 +85,7 @@ def useradd():
 
     except IntegrityError as e:
         db.session.rollback()
-        dupkey = e.message.split('for key')[1].split("'")[1]
+        dupkey = e.args[0].split('for key')[1].split("'")[1]
         return redirect(url_for('account.login', error=dupkey))
     else:
         return redirect(url_for('account.login', error='None'))
@@ -107,5 +104,4 @@ def logout():
 def rank():
     rank = User.query.filter_by(active=True).order_by(desc('score'), 'updated').all()
     return render_template('account/rank.html',
-                           rank=rank,
-                           rank_cnt=len(rank))
+                           rank=rank)
