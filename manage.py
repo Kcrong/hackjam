@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from app import app, manager
+from app import create_app, manager
 from app import init_db
+
+app = create_app()
 
 
 @manager.command

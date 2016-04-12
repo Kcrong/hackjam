@@ -2,11 +2,10 @@
 # -*- coding:utf-8 -*-
 import sys
 
-from flask import Flask, session
+from flask import Flask
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
-
 from werkzeug.contrib.fixers import ProxyFix
 
 app = Flask(__name__)
@@ -29,10 +28,8 @@ def create_app():
     return app
 
 
-app = create_app()
-db = SQLAlchemy(app)
+db.init_app(app)
 
-import models
 from .models import *
 
 migrate = Migrate(app, db)
@@ -42,25 +39,9 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 
-def user_session():
-    try:
-        session['login']
-    except KeyError:
-        session['login'] = False
-        session['admin'] = False
-    return session
-
-
 @app.template_filter('torank')
 def index_rank(index):
     return int(index) + 1
-
-
-# for error 'mysql server gone'
-@app.teardown_request
-def refresh_db(exception=None):
-    db.session.remove()
-    db.create_scoped_session()
 
 
 def init_db():
