@@ -5,6 +5,7 @@ import sys
 from flask import Flask, session, redirect, url_for
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
+from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -12,10 +13,12 @@ try:
     import MySQLdb
 except ImportError:
     import pymysql
+
     pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 
 def create_app():
@@ -40,25 +43,13 @@ from .models import *
 
 migrate = Migrate(app, db)
 
+login_manager.init_app(app)
+
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
 
 
-@app.template_filter('torank')
-def index_rank(index):
-    return int(index) + 1
-
-
-# 비회원 제한을 위한 데코레이터
-def login_required(func):
-    def check_login():
-        try:
-            if session['login']:
-                func()
-        except KeyError:
-            pass
-
-        return redirect(url_for('account.login'))
-
-    return check_login()
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
