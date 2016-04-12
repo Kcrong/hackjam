@@ -4,7 +4,7 @@ import random
 import string
 
 from flask import render_template, request, session, redirect, url_for
-from flask.ext.security import current_user
+from flask.ext.security import current_user, login_required
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
 from sqlalchemy import desc
@@ -53,26 +53,21 @@ def saveprobfile(getfile, p):
 
 
 @prob_blueprint.route('/upload', methods=['GET', 'POST'])
+@login_required
 def upload():
-    try:
-        if session['login'] is not True:
-            return redirect(url_for('account.login'))
-    except KeyError:
-        return redirect(url_for('account.login'))
-
     if request.method == 'GET':
         try:
             error = request.args['error']
         except BadRequestKeyError:
             error = False
 
-        prob_list = db.session.query(Prob).filter_by(maker_id=session['id']).all()
-        category_list = db.session.query(Category).filter_by(active=True).all()
+        category_list = Category.query.filter_by(active=True).all()
 
         return render_template('prob/upload.html',
                                category_list=category_list,
-                               prob_list=prob_list,
+                               prob_list=current_user.prob,
                                error=error)
+    # request.method == 'POST'
     else:
         try:
             data = request.form
@@ -123,41 +118,33 @@ def upload():
 
 
 @prob_blueprint.route('/auth', methods=['GET', 'POST'])
+@login_required
 def auth():
     if request.method == 'GET':
         return render_template('prob/auth.html',
                                error=None)
     else:
-        try:
-            if not session['login']:
-                return render_template('prob/auth.html',
-                                       error='login')
-        except KeyError:
-            return redirect(url_for('account.login'))
 
-        key = request.form['authkey']
-        p = db.session.query(Prob).filter_by(key=key, active=True).first()
-        u = db.session.query(User).filter_by(userid=session['userid']).first()
+        p = Prob.query.filter_by(key=request.form['authkey'], active=True).first()
+        title = None
 
-        if p is None:
-            return render_template('prob/auth.html',
-                                   error='true')
-        elif p.maker_id == u.id:
-            return render_template('prob/auth.html',
-                                   error='mine')
+        if p is None:  # 해당 인증키인 문제가 없을 경우
+            error = '올바른 인증키가 아닙니다!'
+        elif p in current_user.prob:  # 자신이 낸 문제일 경우
+            error = '자신이 낸 문제는 인증할 수 없습니다!'
+        elif p in current_user.success_prob:  # 이미 인증한 문제일 경우
+            error = '이미 인증한 문제입니다.'
         else:
-            if p in u.success_prob:
-                return render_template('prob/auth.html',
-                                       error='dup')
-
-            u.success_prob.append(p)
-            u.score = int(u.score) + 1
-            u.updated = datetime.now()
+            current_user.success_prob.append(p)
+            current_user.score = int(current_user.score) + 1
             db.session.commit()
 
-            return render_template('prob/auth.html',
-                                   error='false',
-                                   title=p.title)
+            error = False
+            title = p.title
+
+        return render_template('prob/auth.html',
+                               error=error,
+                               title=title)
 
 
 @prob_blueprint.route('/dupcheck')
