@@ -5,9 +5,9 @@
         var idcheck = false;
         var nickcheck = false;
 
-    {% for message in alert_message %}
-        alert("{{ message }}");
-    {% endfor %}
+        {% if alert_message %}
+            alert("{{ alert_message }}");
+        {% endif %}
 
     </script>
 

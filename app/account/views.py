@@ -23,7 +23,7 @@ def login():
     if request.method == 'GET':
         try:
             error = request.args.get('error')
-            return render_template('account/login.html', alert_message=[user_error_message[error]])
+            return render_template('account/login.html', alert_message=user_error_message[error])
         except (BadRequestKeyError, KeyError):
             pass
 
@@ -37,7 +37,7 @@ def login():
 
         if u is None:
             return render_template('account/login.html',
-                                   alert_message=['아이디 혹은 비밀번호가 잘못 입력되었습니다.'])
+                                   alert_message='아이디 혹은 비밀번호가 잘못 입력되었습니다.')
 
         else:
             login_user(u)
