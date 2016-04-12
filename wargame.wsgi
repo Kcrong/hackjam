@@ -1,9 +1,11 @@
 #!/usr/bin/python
-
+import os
 import sys
-sys.path.insert(0, '/home/hyunwoo/wargame_bt')
 
-activate_this = '/home/hyunwoo/wargame_bt/env/bin/activate_this.py'
+file_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, file_path)
+
+activate_this = os.path.join(file_path, '/env/bin/activate_this.py')
 execfile(activate_this, dict(__file__=activate_this))
 
 from werkzeug.debug import DebuggedApplication
