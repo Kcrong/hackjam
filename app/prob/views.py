@@ -150,11 +150,9 @@ def auth():
 @prob_blueprint.route('/dupcheck')
 def dupcheck():
     key = request.args['key']
-    if db.session.query(Prob).filter_by(key=key).first() is not None:
-
+    if Prob.query.filter_by(key=key).first() is not None:
         return 'true'
     else:
-
         return 'false'
 
 
@@ -166,13 +164,13 @@ def talking():
                                all_talk=all_talk)
 
     elif request.method == 'POST':
-        if session['login'] is False:
+        if current_user.is_authenticated is False:
             return redirect(url_for('account.login'))
 
-        content = request.form['talk']
-        user = User.query.filter_by(userid=session['userid']).first()
+        else:  # 로그인한 사용자만
+            content = request.form['talk']
 
-        db.session.add(Talk(content, user))
-        db.session.commit()
+            db.session.add(Talk(content, current_user))
+            db.session.commit()
 
-        return redirect(url_for('prob.talking'))
+            return redirect(url_for('prob.talking'))
