@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
 from datetime import datetime
-
-from flask.ext.login import UserMixin, AnonymousUserMixin
+from flask.ext.security import UserMixin, RoleMixin
+from flask.ext.login import AnonymousUserMixin
 
 from . import db
 
@@ -10,6 +10,16 @@ success_probs = db.Table('success_probs',
                          db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
                          db.Column('prob_id', db.Integer, db.ForeignKey('prob.id'))
                          )
+
+roles_users = db.Table('roles_users',
+                       db.Column('user_id', db.INTEGER, db.ForeignKey('user.id')),
+                       db.Column('role_id', db.INTEGER, db.ForeignKey('role.id')))
+
+
+class Role(db.Model, RoleMixin):
+    id = db.Column(db.INTEGER, primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
 
 
 class User(db.Model, UserMixin):
@@ -26,12 +36,21 @@ class User(db.Model, UserMixin):
     created = db.Column(db.DATETIME, default=datetime.now(), nullable=False)
     updated = db.Column(db.DATETIME, default=datetime.now(), nullable=False, onupdate=datetime.now())
 
+    roles = db.relationship('Role', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
+
     def __repr__(self):
         return "<User %s>" % self.nickname
 
+    def __init__(self, **kwargs):
+        self.success_prob.append(Prob.query.filter_by(title='signup').first())
+        self.userid = kwargs.get('userid')
+        self.userpw = kwargs.get('userpw')
+        self.nickname = kwargs.get('nickname')
+
 
 class AnonymousUser(AnonymousUserMixin):
-    success_probs = list()
+    success_prob = list()
     is_admin = False
     nickname = "Guest"
 
