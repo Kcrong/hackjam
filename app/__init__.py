@@ -8,6 +8,12 @@ from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.contrib.fixers import ProxyFix
 
+try:
+    import MySQLdb
+except ImportError:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+
 app = Flask(__name__)
 db = SQLAlchemy()
 
