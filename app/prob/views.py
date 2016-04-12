@@ -30,7 +30,7 @@ def list():
         session['login'] = False
         success_prob = []
 
-    return render_template('prob.html',
+    return render_template('prob/prob.html',
                            category_data=all_category,
                            success=success_prob)
 
@@ -78,7 +78,7 @@ def upload():
         prob_list = db.session.query(Prob).filter_by(maker_id=session['id']).all()
         category_list = db.session.query(Category).filter_by(active=True).all()
 
-        return render_template('upload.html',
+        return render_template('prob/upload.html',
                                category_list=category_list,
                                prob_list=prob_list,
                                error=error)
@@ -134,12 +134,12 @@ def upload():
 @prob_blueprint.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'GET':
-        return render_template('auth.html',
+        return render_template('prob/auth.html',
                                error=None)
     else:
         try:
             if not session['login']:
-                return render_template('auth.html',
+                return render_template('prob/auth.html',
                                        error='login')
         except KeyError:
             return redirect(url_for('account.login'))
@@ -149,14 +149,14 @@ def auth():
         u = db.session.query(User).filter_by(userid=session['userid']).first()
 
         if p is None:
-            return render_template('auth.html',
+            return render_template('prob/auth.html',
                                    error='true')
         elif p.maker_id == u.id:
-            return render_template('auth.html',
+            return render_template('prob/auth.html',
                                    error='mine')
         else:
             if p in u.success_prob:
-                return render_template('auth.html',
+                return render_template('prob/auth.html',
                                        error='dup')
 
             u.success_prob.append(p)
@@ -164,7 +164,7 @@ def auth():
             u.updated = datetime.now()
             db.session.commit()
 
-            return render_template('auth.html',
+            return render_template('prob/auth.html',
                                    error='false',
                                    title=p.title)
 
@@ -184,7 +184,7 @@ def dupcheck():
 def talking():
     if request.method == 'GET':
         all_talk = Talk.query.filter_by(active=True).order_by(desc('id')).all()
-        return render_template('talk.html',
+        return render_template('prob/talk.html',
                                all_talk=all_talk)
 
     elif request.method == 'POST':

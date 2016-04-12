@@ -12,12 +12,12 @@ def main_index():
 
 @main_blueprint.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('main/index.html')
 
 
 @main_blueprint.route('/whoami')
 def aboutme():
-    return render_template('about_admin.html')
+    return render_template('main/about_admin.html')
 
 
 @main_blueprint.route('/prob_image/<path:filename>')

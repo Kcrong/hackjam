@@ -19,20 +19,20 @@ def login():
             pass
         else:
             if error == "userid":
-                return render_template('login.html',
+                return render_template('account/login.html',
                                        useradd_error=True,
                                        useradd_error_message=u"사용할 수 없는 아이디 입니다.")
             elif error == "nickname":
-                return render_template('login.html',
+                return render_template('account/login.html',
                                        useradd_error=True,
                                        useradd_error_message=u"사용할 수 없는 닉네임 입니다.")
             elif error == 'None':
-                return render_template('login.html',
+                return render_template('account/login.html',
                                        success=True)
             else:
                 pass
 
-        return render_template('login.html')
+        return render_template('account/login.html')
 
     else:
         data = request.form
@@ -42,7 +42,7 @@ def login():
             u = db.session.query(User).filter_by(userid=data['userid'], userpw=hash(data['userpw']), active=True).one()
 
         except NoResultFound:
-            return render_template('login.html',
+            return render_template('account/login.html',
                                    loginerror=True)
         else:
             session['login'] = True
