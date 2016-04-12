@@ -78,10 +78,12 @@ def useradd():
 
     except IntegrityError as e:
         db.session.rollback()
-        dupkey = e.args[0].split('for key')[1].split("'")[1]
-        return redirect(url_for('account.login', error=dupkey))
+        error = e.args[0].split('for key')[1].split("'")[1]
+
     else:
-        return redirect(url_for('account.login', error='None'))
+        error = 'None'
+
+    return redirect(url_for('account.login', error=error))
 
 
 @account_blueprint.route('/logout')
