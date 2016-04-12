@@ -12,7 +12,7 @@ from . import prob_blueprint
 
 
 def randomkey(length):
-    result = ''.join(random.choice(string.lowercase) for i in range(length))
+    result = ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
     return result[:3000]
 
 

@@ -15,7 +15,7 @@ def run():
 @manager.command
 def db_init():
     init_db()
-    print "Success to Generate db init data."
+    print("Success to Generate db init data.")
 
 
 if __name__ == "__main__":

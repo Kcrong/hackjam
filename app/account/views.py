@@ -98,9 +98,9 @@ def useradd():
     try:
         db.session.commit()
 
-    except IntegrityError, e:
+    except IntegrityError as e:
         db.session.rollback()
-        dupkey = e[0].split('for key')[1].split("'")[1]
+        dupkey = e.message.split('for key')[1].split("'")[1]
         return redirect(url_for('account.login', error=dupkey))
     else:
         return redirect(url_for('account.login', error='None'))
@@ -117,12 +117,12 @@ def logout():
 
 def test(tmp):
     for i in tmp:
-        print i.score, i.updated
+        print(i.score, i.updated)
 
 
 @account_blueprint.route('/rank')
 def rank():
     rank = User.query.filter_by(active=True).order_by(desc('score'), 'updated').all()
-    return render_template('rank.html',
+    return render_template('account/rank.html',
                            rank=rank,
                            rank_cnt=len(rank))
