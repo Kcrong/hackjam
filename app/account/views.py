@@ -20,14 +20,9 @@ def login():
     if request.method == 'GET':
         try:
             error = request.args.get('error')
-        except BadRequestKeyError:
+            return render_template('account/login.html', alert_message=[user_error_message[error]])
+        except (BadRequestKeyError, KeyError):
             pass
-        else:
-            try:
-                return render_template('account/login.html',
-                                       alert_message=[user_error_message[error]])
-            except KeyError:
-                pass
 
         return render_template('account/login.html')
 
