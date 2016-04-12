@@ -56,33 +56,21 @@ def login():
 def dupcheck():
     # id or nick
     # return str(request.args)
+
     try:
-        userid = request.args['id']
+        dup_check = User.query.filter_by(userid=request.args['id']).first()
+
     except BadRequestKeyError:
-        # nick dup check
-        if db.session.query(User).filter_by(nickname=request.args['nick']).first() is not None:
+        dup_check = User.query.filter_by(nickname=request.args['nick']).first()
 
-            return "true"
-        else:
-
-            return "false"
-
+    if dup_check is None:
+        return 'false'
     else:
-        # id dup check
-        if db.session.query(User).filter_by(nickname=userid).first() is not None:
-
-            return "true"
-        else:
-
-            return "false"
+        return 'true'
 
 
 @account_blueprint.route('/useradd', methods=['POST'])
 def useradd():
-    # userid
-    # userpw
-    # nickname
-
     if len(request.form['userid']) < 6:
         return redirect(url_for('account.login', error="userid"))
     elif len(request.form['nickname']) < 6:
@@ -113,11 +101,6 @@ def logout():
     session['userid'] = 'Guest'
     session['admin'] = False
     return redirect(url_for('.login'))
-
-
-def test(tmp):
-    for i in tmp:
-        print(i.score, i.updated)
 
 
 @account_blueprint.route('/rank')
