@@ -2,12 +2,14 @@
 # -*- coding:utf-8 -*-
 import sys
 
-from flask import Flask, session, redirect, url_for
+from flask import Flask
+from flask.ext.login import LoginManager
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
-from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.contrib.fixers import ProxyFix
+
+from flask.ext.security import Security, SQLAlchemyUserDatastore
 
 try:
     import MySQLdb
@@ -44,7 +46,9 @@ from .models import *
 migrate = Migrate(app, db)
 
 login_manager.init_app(app)
-login_manager.anonymous_user = AnonymousUser
+
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore, anonymous_user=AnonymousUser)
 
 manager = Manager(app)
 
@@ -53,4 +57,4 @@ manager.add_command('db', MigrateCommand)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.query.get(user_id)
