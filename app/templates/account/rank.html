@@ -19,7 +19,8 @@
         </tr>
       </thead>
       <tbody>
-        {% for ranking in range(0,rank_cnt) %}
+
+        {% for ranking in range(0, rank|length) %}
             {% if rank[ranking].score != 0 %}
             <tr>
                 <th scope="row">{{ ranking|torank }}</th>

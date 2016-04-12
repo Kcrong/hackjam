@@ -78,7 +78,7 @@ def useradd():
     u.userpw = hash(request.form['userpw'])
     u.nickname = request.form['nickname']
 
-    u.success_prob.append(db.session.query(Prob).filter_by(title="signup").first())
+    u.success_prob.append(Prob.query.filter_by(title="signup").first())
     db.session.add(u)
     try:
         db.session.commit()
