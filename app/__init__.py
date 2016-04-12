@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import sys
 
-from flask import Flask
+from flask import Flask, session, redirect, url_for
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -50,3 +50,15 @@ def index_rank(index):
     return int(index) + 1
 
 
+# 비회원 제한을 위한 데코레이터
+def login_required(func):
+    def check_login():
+        try:
+            if session['login']:
+                func()
+        except KeyError:
+            pass
+
+        return redirect(url_for('account.login'))
+
+    return check_login()

@@ -18,11 +18,11 @@ def randomkey(length):
 
 @prob_blueprint.route('/list')
 def list():
-    all_category = db.session.query(Category).filter_by(active=True).all()
+    all_category = Category.query.filter_by(active=True).all()
 
     try:
         if session['login'] is True:
-            u = db.session.query(User).filter_by(userid=session['userid']).first()
+            u = User.query.filter_by(userid=session['userid']).first()
             success_prob = u.success_prob
         else:
             success_prob = []
