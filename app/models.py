@@ -1,7 +1,10 @@
 # -*- coding:utf-8 -*-
 
-from . import db
 from datetime import datetime
+
+from flask.ext.login import UserMixin, AnonymousUserMixin
+
+from . import db
 
 success_probs = db.Table('success_probs',
                          db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -9,7 +12,7 @@ success_probs = db.Table('success_probs',
                          )
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     userid = db.Column(db.String(30), unique=True, nullable=False)
     userpw = db.Column(db.String(50), nullable=False)
@@ -22,6 +25,18 @@ class User(db.Model):
                                    backref=db.backref('users'))
     created = db.Column(db.DATETIME, default=datetime.now(), nullable=False)
     updated = db.Column(db.DATETIME, default=datetime.now(), nullable=False, onupdate=datetime.now())
+
+    def __repr__(self):
+        return "<User %s>" % self.nickname
+
+
+class AnonymousUser(AnonymousUserMixin):
+    success_probs = list()
+    is_admin = False
+    nickname = "Guest"
+
+    def __repr__(self):
+        return "<Anonymous Guest>"
 
 
 class Prob(db.Model):
@@ -40,6 +55,9 @@ class Prob(db.Model):
     category = db.relationship('Category')
     category_id = db.Column(db.INTEGER, db.ForeignKey('category.id'))
 
+    def __repr__(self):
+        return "<Prob %s>" % self.title
+
 
 class Category(db.Model):
     id = db.Column(db.INTEGER, primary_key=True, unique=True, nullable=False)
@@ -51,6 +69,8 @@ class Category(db.Model):
     def probes(self):
         return db.object_session(self).query(Prob).filter_by(active=True).with_parent(self).all()
 
+    def __repr__(self):
+        return "<Category %s>" % self.title
 
 class Talk(db.Model):
     id = db.Column(db.INTEGER, primary_key=True)
@@ -63,3 +83,6 @@ class Talk(db.Model):
     def __init__(self, content, user):
         self.content = content
         self.user = user
+
+    def __repr__(self):
+        return "<Talk by %s>" % self.user.nickname

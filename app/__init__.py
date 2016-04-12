@@ -44,6 +44,7 @@ from .models import *
 migrate = Migrate(app, db)
 
 login_manager.init_app(app)
+login_manager.anonymous_user = AnonymousUser
 
 manager = Manager(app)
 
