@@ -4,6 +4,7 @@ import random
 import string
 
 from flask import render_template, request, session, redirect, url_for
+from flask.ext.security import current_user
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
 from sqlalchemy import desc
@@ -20,19 +21,9 @@ def randomkey(length):
 def list():
     all_category = Category.query.filter_by(active=True).all()
 
-    try:
-        if session['login'] is True:
-            u = User.query.filter_by(userid=session['userid']).first()
-            success_prob = u.success_prob
-        else:
-            success_prob = []
-    except KeyError:
-        session['login'] = False
-        success_prob = []
-
     return render_template('prob/prob.html',
                            category_data=all_category,
-                           success=success_prob)
+                           success=current_user.success_prob)
 
 
 def saveimagefile(getfile, p):
