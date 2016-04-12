@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from flask import render_template, request, redirect, url_for
-from flask.ext.login import login_required, login_user, logout_user
+from flask.ext.login import login_user, logout_user
+from flask.ext.security import login_required
 from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError
 
 from . import account_blueprint
+from .. import user_datastore
 from ..models import *
 
 user_error_message = {
@@ -31,7 +33,7 @@ def login():
     else:
         data = request.form
 
-        u = User.query.filter_by(userid=data['userid'], userpw=hash(data['userpw']), active=True).first()
+        u = User.query.filter_by(userid=data['userid'], userpw=data['userpw'], active=True).first()
 
         if u is None:
             return render_template('account/login.html',
@@ -61,18 +63,17 @@ def dupcheck():
 
 @account_blueprint.route('/useradd', methods=['POST'])
 def useradd():
-    if len(request.form['userid']) < 6:
+    data = request.form
+
+    if len(data['userid']) < 6:
         return redirect(url_for('account.login', error="userid"))
-    elif len(request.form['nickname']) < 6:
+    elif len(data['nickname']) < 6:
         return redirect(url_for('account.login', error="nickname"))
 
-    u = User()
-    u.userid = request.form['userid']
-    u.userpw = hash(request.form['userpw'])
-    u.nickname = request.form['nickname']
+    user_datastore.create_user(userid=data['userid'],
+                               userpw=data['userpw'],
+                               nickname=data['nickname'])
 
-    u.success_prob.append(Prob.query.filter_by(title="signup").first())
-    db.session.add(u)
     try:
         db.session.commit()
 
