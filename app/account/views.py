@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for
+from flask.ext.login import login_required, login_user, logout_user
 from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError
@@ -37,10 +38,7 @@ def login():
                                    alert_message=['아이디 혹은 비밀번호가 잘못 입력되었습니다.'])
 
         else:
-            session['login'] = True
-            session['userid'] = u.userid
-            session['id'] = u.id
-            session['admin'] = u.is_admin
+            login_user(u)
             return redirect(url_for('main.main_index'))
 
 
@@ -87,11 +85,9 @@ def useradd():
 
 
 @account_blueprint.route('/logout')
+@login_required
 def logout():
-    session['login'] = False
-    session['nickname'] = 'Guest'
-    session['userid'] = 'Guest'
-    session['admin'] = False
+    logout_user()
     return redirect(url_for('.login'))
 
 
