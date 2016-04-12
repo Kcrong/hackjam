@@ -63,16 +63,16 @@
                     <li>
                         <a href="/account/rank">Rank</a>
                     </li>
+                    {% if current_user.is_authenticated == True %}
                     <li>
-                        {% if session['login'] == True %}
-                            <a href="/account/logout">Logout</a>
-                        {% else %}
-                            <a href="/account/login">Login</a>
-                        {% endif %}
+                        <a href="/account/logout">Logout</a>
                     </li>
-                    {% if session['login'] == True %}
                     <li>
                         <a href="/prob/upload">My Probs</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="/account/login">Login</a>
                     </li>
                     {% endif %}
                     <li>
