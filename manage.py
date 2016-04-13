@@ -14,6 +14,10 @@ def run():
 
 @manager.command
 def init_db():
+    c = Category()
+    c.title = 'SignUp'
+    c.active = False
+
     u = User()
     u.nickname = 'admin'
     u.userid = 'Administrator'
@@ -24,12 +28,16 @@ def init_db():
     p.title = 'signup'
     p.key = 'Hello World'
     p.active = False
+
     p.maker = u
-
     u.success_prob = [p]
+    c.prob.append(p)
+    p.category = c
 
-    db.session.add_all([u, p])
+    db.session.add_all([c, u, p])
     db.session.commit()
+
+    print('Success')
 
 
 if __name__ == "__main__":
