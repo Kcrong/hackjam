@@ -1,20 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import random
-import string
 
-from flask import render_template, request, session, redirect, url_for
-from flask.ext.security import current_user, login_required
+from flask import render_template, redirect, url_for
+from flask.ext.login import login_required, current_user
+from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError, RequestEntityTooLarge
-from sqlalchemy import desc
-from ..models import *
+
 from . import prob_blueprint
-
-
-def randomkey(length):
-    result = ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
-    return result[:3000]
+from ..models import *
 
 
 @prob_blueprint.route('/list')
@@ -24,32 +18,6 @@ def list():
     return render_template('prob/prob.html',
                            category_data=all_category,
                            success=current_user.success_prob)
-
-
-def saveimagefile(getfile, p):
-    if getfile.filename == '':
-        if p.image is None:
-            p.image = 'default.png'
-            p.image_original = 'default.png'
-
-    else:
-        p.image_original = getfile.filename
-        filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
-        getfile.save(prob_blueprint.root_path + '/prob_images/' + filename)
-        p.image = filename
-
-
-def saveprobfile(getfile, p):
-    if getfile.filename == '':
-        if p.file is None:
-            p.file = ''
-            p.file_original = ''
-
-    else:
-        p.file_original = getfile.filename
-        filename = randomkey(len(getfile.filename)) + '.' + getfile.filename.split('.')[-1]
-        getfile.save(prob_blueprint.root_path + '/prob_files/' + filename)
-        p.file = filename
 
 
 @prob_blueprint.route('/upload', methods=['GET', 'POST'])
@@ -67,43 +35,44 @@ def upload():
                                category_list=category_list,
                                prob_list=current_user.prob,
                                error=error)
+
     # request.method == 'POST'
     else:
         try:
             data = request.form
         except RequestEntityTooLarge:
-            return redirect(url_for('.upload', error='bigfile'))
-        for i in data:
-            if i == 'probimage' or i == 'probfile':
-                continue
-            elif data[i] == '':
-                return redirect(url_for('.upload', error='nodata'))
+            return redirect(url_for('.upload', error='첨부파일이 너무 큽니다!'))
 
-        if data['onoff'] == 'on':
-            onoff = True
-        elif data['onoff'] == 'off':
-            onoff = False
-        probimage = request.files['probimage']
-        probfile = request.files['probfile']
+        # post 요청 데이터 점검
+        for i in data:
+            if not i in ['probimage', 'probfile'] and len(data[i]) == 0:
+                return redirect(url_for('.upload', error='제목, 카테고리, 인증키, 내용을 모두 입력해주세요!'))
+
+        _onoff = {
+            'on': True,
+            'off': False
+        }
+
         p = db.session.query(Prob).filter_by(id=data['id']).first()
-        u = db.session.query(User).filter_by(id=session['id']).first()
+        u = current_user
         c = db.session.query(Category).filter_by(title=data['category']).first()
 
-        if p is None or data['add'] == 'true':
+        if data['add'] == 'true' or p is None:
             p = Prob()
             db.session.add(p)
 
+        p.savefile(request.files['probimage'], 'image')
+        p.savefile(request.files['probfile'], 'file')
+
         p.title = data['probtitle']
+
         if p.key != data['probkey']:
             p.key = data['probkey']
+
         p.content = data['probcontent']
-        p.maker_id = u.id
-        saveimagefile(probimage, p)
-        saveprobfile(probfile, p)
-        p.active = onoff
+
+        p.active = _onoff[data['onoff']]
         p.maker = u
-        p.maker_id = u.id
-        p.category_id = c.id
         p.category = c
 
         try:
@@ -112,7 +81,7 @@ def upload():
         except IntegrityError:
             db.session.rollback()
 
-            return redirect(url_for('.upload', error='authkey') + '#ProbTitle')
+            return redirect(url_for('.upload', error='사용할 수 없는 인증키 입니다!') + '#ProbTitle')
 
         return redirect(url_for('.upload'))
 
