@@ -56,10 +56,10 @@ class Prob(db.Model):
     maker = db.relationship('User',
                             backref=db.backref('probes'))
     active = db.Column(db.BOOLEAN, default=True, nullable=False)
-    image = db.Column(db.String(3000))
-    image_original = db.Column(db.String(300))
-    file = db.Column(db.String(3000))
-    file_original = db.Column(db.String(300))
+    image = db.Column(db.String(3000), default='default.png')
+    image_original = db.Column(db.String(300), default='default.png')
+    file = db.Column(db.String(3000), default='')
+    file_original = db.Column(db.String(300), default='')
     category = db.relationship('Category')
     category_id = db.Column(db.INTEGER, db.ForeignKey('category.id'))
 
@@ -75,30 +75,23 @@ class Prob(db.Model):
 
         # type 이 "image" 면 True,
         # 아닐 경우 False
-        type = type == 'image'
+        type = type == 'probimage'
 
         # 인자값으로 "image" 가 왔을 경우, save 변수에는 self.image 가 들어가고
         # 아닐 경우 save 변수에는 self.file 값이 들어간다.
-        if type:
+        if type:  # 이미지 일때
             save = self.image
             directory = 'prob_images'
-            default = 'default.png'
-        else:
+        else:  # 문제 파일 일때
             save = self.file
             directory = 'prob_files'
-            default = ''
 
-        if len(file.filename) == 0 and save is None:
-            save = default
-            save_original = default
+        save_original = file.filename
+        save = self.random_string(len(file.filename)) + '.' + file.filename.split('.')[-1]
+        req_blueprint = current_app.blueprints[request.blueprint]
+        save_path = os.path.join(req_blueprint.root_path, directory, save)
 
-        else:
-            save_original = file.filename
-            save = self.random_string(len(file.filename)) + '.' + file.filename.split('.')[-1]
-            req_blueprint = current_app.blueprints[request.blueprint]
-            save_path = os.path.join(req_blueprint.root_path, directory, save)
-
-            file.save(save_path)
+        file.save(save_path)
 
         if type:  # image
             self.image = save
