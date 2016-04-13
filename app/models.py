@@ -1,8 +1,10 @@
 # -*- coding:utf-8 -*-
-
+import os
+import random
+import string
 from datetime import datetime
-from flask.ext.security import UserMixin, RoleMixin
-from flask.ext.login import AnonymousUserMixin
+from flask import request
+from flask.ext.login import AnonymousUserMixin, current_app, UserMixin
 
 from . import db
 
@@ -10,16 +12,6 @@ success_probs = db.Table('success_probs',
                          db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
                          db.Column('prob_id', db.Integer, db.ForeignKey('prob.id'))
                          )
-
-roles_users = db.Table('roles_users',
-                       db.Column('user_id', db.INTEGER, db.ForeignKey('user.id')),
-                       db.Column('role_id', db.INTEGER, db.ForeignKey('role.id')))
-
-
-class Role(db.Model, RoleMixin):
-    id = db.Column(db.INTEGER, primary_key=True)
-    name = db.Column(db.String(80), unique=True)
-    description = db.Column(db.String(255))
 
 
 class User(db.Model, UserMixin):
@@ -35,9 +27,6 @@ class User(db.Model, UserMixin):
                                    backref=db.backref('users'))
     created = db.Column(db.DATETIME, default=datetime.now(), nullable=False)
     updated = db.Column(db.DATETIME, default=datetime.now(), nullable=False, onupdate=datetime.now())
-
-    roles = db.relationship('Role', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
 
     def __repr__(self):
         return "<User %s>" % self.nickname
@@ -77,6 +66,47 @@ class Prob(db.Model):
     def __repr__(self):
         return "<Prob %s>" % self.title
 
+    @staticmethod
+    def random_string(length):
+        result = ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
+        return result[:3000]
+
+    def savefile(self, file, type):
+
+        # type 이 "image" 면 True,
+        # 아닐 경우 False
+        type = type == 'image'
+
+        # 인자값으로 "image" 가 왔을 경우, save 변수에는 self.image 가 들어가고
+        # 아닐 경우 save 변수에는 self.file 값이 들어간다.
+        if type:
+            save = self.image
+            directory = 'prob_images'
+            default = 'default.png'
+        else:
+            save = self.file
+            directory = 'prob_files'
+            default = ''
+
+        if len(file.filename) == 0 and save is None:
+            save = default
+            save_original = default
+
+        else:
+            save_original = file.filename
+            save = self.random_string(len(file.filename)) + '.' + file.filename.split('.')[-1]
+            req_blueprint = current_app.blueprints[request.blueprint]
+            save_path = os.path.join(req_blueprint.root_path, directory, save)
+
+            file.save(save_path)
+
+        if type:  # image
+            self.image = save
+            self.image_original = save_original
+        else:  # file
+            self.file = save
+            self.file_original = save_original
+
 
 class Category(db.Model):
     id = db.Column(db.INTEGER, primary_key=True, unique=True, nullable=False)
@@ -90,6 +120,7 @@ class Category(db.Model):
 
     def __repr__(self):
         return "<Category %s>" % self.title
+
 
 class Talk(db.Model):
     id = db.Column(db.INTEGER, primary_key=True)

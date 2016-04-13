@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask import render_template, request, redirect, url_for
-from flask.ext.login import login_user, logout_user
-from flask.ext.security import login_required
+from flask import render_template, redirect, url_for
+from flask.ext.login import login_user, logout_user, login_required
 from sqlalchemy import desc
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequestKeyError
 
 from . import account_blueprint
-from .. import user_datastore
 from ..models import *
 
 user_error_message = {
@@ -69,9 +67,12 @@ def useradd():
         if len(data[req_name]) < 6:
             return redirect(url_for('account.login', error=req_name))
 
-    user_datastore.create_user(userid=data['userid'],
-                               userpw=data['userpw'],
-                               nickname=data['nickname'])
+    u = User()
+    u.userid = data['userid']
+    u.userpw = data['userpw']
+    u.nickname = data['nickname']
+
+    db.session.add(u)
 
     try:
         db.session.commit()
