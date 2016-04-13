@@ -61,8 +61,12 @@ def upload():
             p = Prob()
             db.session.add(p)
 
-        p.savefile(request.files['probimage'], 'image')
-        p.savefile(request.files['probfile'], 'file')
+        valid_files = [(request.files[req_filename], req_filename)  # request.files[req_filename], req_filename 리스트
+                       for req_filename in request.files  # 받은 파일 리스트 중,
+                       if len(request.files[req_filename].filename) > 0]  # 해당 이름을 가진 파일의 이름 길이가 0이 아닐때만 리스트에 포함
+
+        for file, filename in valid_files:  # 유효한 파일들 중에서
+            p.savefile(file, filename)  # 저장
 
         p.title = data['probtitle']
 
