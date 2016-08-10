@@ -55,30 +55,29 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/prob/list">Prob</a>
+                        <a href="{{ url_for('prob.list') }}">Prob</a>
                     </li>
                     <li>
-                        <a href="/prob/auth">Auth</a>
+                        <a href="{{ url_for('prob.auth') }}">Auth</a>
                     </li>
                     <li>
-                        <a href="/account/rank">Rank</a>
+                        <a href="{{ url_for('account.rank') }}">Rank</a>
                     </li>
                     {% if current_user.is_authenticated == True %}
                     <li>
-                        <a href="/account/logout">Logout</a>
+                        <a href="{{ url_for('account.logout') }}">Logout</a>
                     </li>
                     <li>
-                        <a href="/prob/upload">My Probs</a>
+                        <a href="{{ url_for('prob.upload') }}">My Probs</a>
                     </li>
                     {% else %}
                     <li>
-                        <a href="/account/login">Login</a>
+                        <a href="{{ url_for('account.login') }}">Login</a>
                     </li>
                     {% endif %}
                     <li>
-                        <a href="/prob/talk">Chat</a>
+                        <a href="{{ url_for('prob.talking') }}">Chat</a>
                     </li>
-
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
